@@ -1,3 +1,4 @@
+https://debeatzgh.wordpress.com/wp-content/uploads/2025/08/wp-17557968974774177007079459536879.jpg
  # 🌐 Personal Portfolio Website
 
 A simple and responsive personal portfolio website built with **HTML, CSS, and JavaScript**.  
@@ -16,7 +17,7 @@ Live Demo 👉 [View Portfolio](https://debeatzgh.github.io/portfolio-site/)
 - Contact section with email & social links  
 - **Dark mode toggle** 🌙☀️  
 
----
+---https://debeatzgh.wordpress.com/wp-content/uploads/2025/08/adarkthemepreviewofapersonalportfoliowebsitewithglowingblueaccentsprojectshowcasecardsandamodernnavigationbar8701627220551173592.jpg
 
 ## 🛠️ Technologies Used
 - **HTML5** – Structure  
@@ -32,3 +33,4 @@ To run this project locally:
 1. Clone the repository:
    ```bash
    git clone https://github.com/debeatzgh1/portfolio-site.git
+https://debeatzgh.wordpress.com/wp-content/uploads/2025/08/minimalistbusiness-stylethumbnailrepresentingaportfoliowebsite5051039404148347617.jpg
