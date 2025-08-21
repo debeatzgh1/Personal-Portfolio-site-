@@ -1,9 +1,9 @@
-# # 🌐 Personal Portfolio Website
+ # 🌐 Personal Portfolio Website
 
 A simple and responsive personal portfolio website built with **HTML, CSS, and JavaScript**.  
 This project is perfect for showcasing your skills, projects, and contact information.  
 
-Live Demo 👉 [View Portfolio](https://debeatzgh1.github.io/portfolio-site/)
+Live Demo 👉 [View Portfolio](https://debeatzgh.github.io/portfolio-site/)
 
 ---
 
