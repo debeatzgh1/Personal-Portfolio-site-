@@ -105,7 +105,7 @@ Our platform is built to help **students, creators, startups, and professionals*
 <h2>Quick Start</h2>
 <ol>
   <li>Clone:
-    <pre><code>git clone https://github.com/yourusername/debeatzgh.git</code></pre>
+    <pre><code>git clone https://github.com/debeatzgh1/Personal-Portfolio-site-</code></pre>
   </li>
   <li>Enter folder:
     <pre><code>cd debeatzgh</code></pre>
