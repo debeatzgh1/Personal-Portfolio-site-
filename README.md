@@ -51,7 +51,7 @@ Our platform is built to help **students, creators, startups, and professionals*
 ---
 
 ## 👉 Get Started  
-🔥 **Start your journey today → [Visit DeBeatzGH](https://debeatzgh.wordpress.com/)**  
+🔥 **Start your journey today → [Visit DeBeatzGH]([https://debeatzgh.wordpress.com/](https://www.patreon.com/debeatzgh/collections))**  
 
 ---
 
