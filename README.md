@@ -37,7 +37,7 @@ Each project comes with a **live GitHub Pages demo**, thumbnail, and quick actio
 ## 📌 Explore More Scripts
 
 👉 Check out the full curated collection here:
-[**Firebase Curated Front-End Components**](https://beatzde4.blogspot.com/p/firebase-curated-front-end-components.html)
+[**Firebase Curated Front-End Components**](https://github.com/debeatzgh1/firebase-front-end-components)
 
 ---
 
