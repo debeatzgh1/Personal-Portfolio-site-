@@ -1,3 +1,30 @@
+# AI Tech Mastery Hub
+
+**Unlock practical ways to monetize online businesses, content, and audiences with the AI Tech Mastery Hub.**  
+Designed for side hustlers, entrepreneurs, and digital creators who want to leverage powerful strategies and tools for digital success.
+
+---
+
+## 🚀 Live Demo
+
+[View Project Slides](https://docs.google.com/presentation/d/1F7_mDSijSndGly1Q05YqOZHI1LaSjjt7/edit?usp=drivesdk&utm_source=chatgpt.com)
+
+---
+
+## 🌟 Features
+
+- Actionable monetization tactics for creators and entrepreneurs
+- Step-by-step guides and resources
+- Ready-to-use templates and strategies for content and audience growth
+- Community support for digital mastery
+
+---
+
+## 🛠️ Getting Started
+
+Clone the repository:
+```bash
+git clone https://github.com/debeatzgh1/AI-Tech-Mastery-Hub-.git
 
 ---
 
