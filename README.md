@@ -211,9 +211,9 @@ python app.py</code></pre>
 <div align="center">
   <p><em>If this project helps you, consider giving it a star. It really helps! ⭐</em></p>
   <p>
-    <a href="https://www.socialcreator.com/debeatzgh" target="_blank" rel="noopener"
+    <a href="https://debeatzgh1.github.io/-My-Brand-Online-Digital-Products-Affiliate-Shop/" target="_blank" rel="noopener"
        style="display:inline-block; padding:10px 16px; margin-top:6px; border-radius:10px; text-decoration:none; font-weight:600; border:1px solid #2563eb;">
-      Open DebeatzGH Now →
+      PRODUCTS →
     </a>
   </p>
 </div>
