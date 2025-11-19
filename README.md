@@ -1,7 +1,3 @@
-You can paste it directly into **README.md**.
-
----
-
 # **👋 Hi, I'm David Kumah (DebeatzGH)**
 
 ### *AI Tools Builder • UI/UX Creator • Digital Products Developer • Tech Blogger*
