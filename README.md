@@ -1,17 +1,17 @@
 <style>
   /* 🌟 Fade Slide Animation */
   @keyframes fadeSlideUp {
-    0% { opacity: 0; transform: translateY(-50%) translateX(20px); }
-    100% { opacity: 1; transform: translateY(-50%) translateX(0); }
+    0% { opacity: 0; transform: translateY(0) translateX(20px); }
+    100% { opacity: 1; transform: translateY(0) translateX(0); }
   }
 
   /* ❤️ Heartbeat Animation */
   @keyframes heartbeat {
-    0% { transform: translateY(-50%) scale(1); }
-    25% { transform: translateY(-50%) scale(1.08); }
-    50% { transform: translateY(-50%) scale(1); }
-    75% { transform: translateY(-50%) scale(1.08); }
-    100% { transform: translateY(-50%) scale(1); }
+    0% { transform: scale(1); }
+    25% { transform: scale(1.08); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.08); }
+    100% { transform: scale(1); }
   }
 
   .floating-btn-group {
@@ -73,20 +73,19 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-  // 🔹 Create Floating Button Group at Middle Left
+  // 🔹 Floating Button at TOP-LEFT
   const btnGroup = document.createElement("div");
   btnGroup.className = "floating-btn-group";
   Object.assign(btnGroup.style, {
     position: "fixed",
-    top: "50%",                    // Middle of screen
-    left: "20px",                  // Left edge spacing
-    transform: "translateY(-50%)",
+    top: "20px",          // Top-left positioning
+    left: "20px",
     zIndex: "9999",
     animation: "heartbeat 2.5s infinite ease-in-out, fadeSlideUp 0.6s ease-out forwards"
   });
 
   // -------------------------------------------------------
-  // ✅ Single Button — OPEN UPDATES
+  // 📌 Updates Button
   // -------------------------------------------------------
   const button = document.createElement("a");
   button.href = "#";
@@ -115,11 +114,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.body.appendChild(modal);
 
-  // 🔹 Button Click → Open Site in Iframe
+  // 🔹 Open Iframe on click
   button.addEventListener("click", function (e) {
     e.preventDefault();
-    document.getElementById("modal-iframe").src = "https://debeatzgh1.github.io/Digital-Creator-s-Essential-Guides-Tools/";
-    document.getElementById("iframe-modal").style.display = "block";
+    document.getElementById("modal-iframe").src = "https://msha.ke/debeatzgh";
+    modal.style.display = "block";
   });
 
   btnGroup.appendChild(button);
@@ -133,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // 🔹 Auto-open external ads in new tab
+  // 🔹 Auto-open external ads in a new tab
   document.getElementById("modal-iframe").addEventListener("load", function () {
     try {
       const links = this.contentDocument.querySelectorAll("a");
