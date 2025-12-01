@@ -1,3 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Debeatzgh Iframe Carousel</title>
+<style>
+  body { margin:0; font-family: Arial, sans-serif; background:#f5f5f5; }
+
+  @keyframes heartbeat {0%{transform:translateX(-50%) scale(1);}25%{transform:translateX(-50%) scale(1.08);}50%{transform:translateX(-50%) scale(1);}75%{transform:translateX(-50%) scale(1.08);}100%{transform:translateX(-50%) scale(1);}}
+
+  #floating-btn {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    width: 60px; height: 60px; background:#007bff; color:#fff;
+    font-size:28px; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; border-radius:50%; box-shadow:0 4px 12px rgba(0,0,0,0.3);
+    opacity:0; animation:heartbeat 2.5s infinite ease-in-out; transition:opacity 0.8s; z-index:9999;
+  }
+
+  #carousel-modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); backdrop-filter:blur(4px); z-index:9998; }
+  .carousel-content { position:relative; width:100%; height:100%; padding:50px 0; box-sizing:border-box; }
+  .carousel-slide { display:none; width:100%; height:100%; text-align:center; }
+  .carousel-slide.active { display:block; }
+  .carousel-thumb { width:200px; border-radius:12px; margin-bottom:12px; }
+  .carousel-title { font-size:20px; font-weight:700; color:#fff; margin-bottom:8px; }
+  .carousel-desc { font-size:14px; color:#eee; margin-bottom:12px; }
+  .carousel-btn { padding:10px 20px; background:#16a34a; color:#fff; border:none; border-radius:8px; cursor:pointer; font-weight:700; }
+  .close-btn { position:absolute; top:15px; right:20px; font-size:32px; color:#fff; cursor:pointer; z-index:10; }
+  .carousel-nav { position:absolute; bottom:40px; left:50%; transform:translateX(-50%); display:flex; gap:15px; }
+  .nav-btn { background:#fff; border:none; padding:10px 16px; border-radius:10px; font-weight:700; cursor:pointer; }
+</style>
+</head>
+<body>
+
+<div id="floating-btn">+</div>
+
+<div id="carousel-modal">
+  <div class="carousel-content">
+    <span class="close-btn">×</span>
+
+    <div class="carousel-slide active" data-url="https://msha.ke/debeatzgh">
+      <img class="carousel-thumb" src="https://debeatzgh.wordpress.com/wp-content/uploads/2025/08/designadigitalproductse-commerceonlinedeals3545265155247625100.jpg" />
+      <div class="carousel-title">Website</div>
+      <div class="carousel-desc">Check out our main website for digital products and deals.</div>
+      <button class="carousel-btn" onclick="openIframe('https://msha.ke/debeatzgh')">Open Website</button>
+    </div>
+
+    <div class="carousel-slide" data-url="https://debeatzgh.wordpress.com/">
+      <img class="carousel-thumb" src="https://debeatzgh.wordpress.com/wp-content/uploads/2025/12/1763148379311_1619032177476517720.jpg" />
+      <div class="carousel-title">Blog</div>
+      <div class="carousel-desc">Visit our blog for latest updates, guides, and news.</div>
+      <button class="carousel-btn" onclick="openIframe('https://debeatzgh.wordpress.com/')">Open Blog</button>
+    </div>
+
+    <div class="carousel-slide" data-url="https://github.com/apps/dkonsult">
+      <img class="carousel-thumb" src="https://debeatzgh.wordpress.com/wp-content/uploads/2025/08/wp-17550753355015215823208011315422.jpg" />
+      <div class="carousel-title">Sign Up</div>
+      <div class="carousel-desc">Sign up for the GitHub app directly in a new tab.</div>
+      <button class="carousel-btn" onclick="window.open('https://github.com/apps/dkonsult','_blank')">Sign Up (New Tab)</button>
+    </div>
+
+    <div class="carousel-nav">
+      <button class="nav-btn" id="prev">Prev</button>
+      <button class="nav-btn" id="next">Next</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Show floating button after 3 seconds
+setTimeout(()=>{document.getElementById('floating-btn').style.opacity='1';},3000);
+
+const btn = document.getElementById('floating-btn');
+const modal = document.getElementById('carousel-modal');
+const slides = modal.querySelectorAll('.carousel-slide');
+let current=0;
+
+btn.onclick=()=>{ modal.style.display='block'; showSlide(current); };
+
+function showSlide(index){
+  slides.forEach((slide,i)=>{
+    slide.classList.toggle('active',i===index);
+    if(i===2) slide.querySelector('button').onclick=()=>{ window.open('https://github.com/apps/dkonsult','_blank'); };
+  });
+}
+
+document.getElementById('prev').onclick=()=>{ current=(current-1+slides.length)%slides.length; showSlide(current); };
+document.getElementById('next').onclick=()=>{ current=(current+1)%slides.length; showSlide(current); };
+
+modal.querySelector('.close-btn').onclick=()=>{ modal.style.display='none'; };
+modal.onclick=e=>{ if(e.target===modal) modal.style.display='none'; };
+
+function openIframe(url){
+  const iframe = document.createElement('iframe');
+  iframe.src=url;
+  iframe.style.width='100%'; iframe.style.height='100%'; iframe.style.border='none';
+  const content = modal.querySelector('.carousel-content');
+  content.innerHTML=''; content.appendChild(iframe);
+}
+
+// Open external ads in new tab inside iframe (if same origin)
+</script>
+
+</body>
+</html>
+
+
 <style>
   /* 🌟 Floating Button Animation */
   @keyframes fadeSlideUp {
