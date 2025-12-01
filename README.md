@@ -1,20 +1,24 @@
 <style>
-  /* 🌟 Floating Button Animation */
+  /* 🌟 Fade Slide Animation */
   @keyframes fadeSlideUp {
-    0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
-    100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    0% { opacity: 0; transform: translateY(-50%) translateX(20px); }
+    100% { opacity: 1; transform: translateY(-50%) translateX(0); }
+  }
+
+  /* ❤️ Heartbeat Animation */
+  @keyframes heartbeat {
+    0% { transform: translateY(-50%) scale(1); }
+    25% { transform: translateY(-50%) scale(1.08); }
+    50% { transform: translateY(-50%) scale(1); }
+    75% { transform: translateY(-50%) scale(1.08); }
+    100% { transform: translateY(-50%) scale(1); }
   }
 
   .floating-btn-group {
     animation: fadeSlideUp 0.6s ease-out;
   }
 
-  .floating-btn-group a:hover {
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
-  }
-
-  /* 🌟 Iframe Modal */
+  /* Iframe Modal Styles */
   #iframe-modal {
     display: none;
     position: fixed;
@@ -69,47 +73,37 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-  // 🔹 Create Floating Button Group
+  // 🔹 Create Floating Button Group at Middle Left
   const btnGroup = document.createElement("div");
   btnGroup.className = "floating-btn-group";
   Object.assign(btnGroup.style, {
     position: "fixed",
-    bottom: "16px",
-    left: "50%",
-    transform: "translateX(-50%)",
-    display: "flex",
-    gap: "10px",
+    top: "50%",                    // Middle of screen
+    left: "20px",                  // Left edge spacing
+    transform: "translateY(-50%)",
     zIndex: "9999",
-    background: "rgba(0,0,0,0.1)",
-    padding: "6px 10px",
-    borderRadius: "10px",
-    boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
-    opacity: "0",
-    animation: "fadeSlideUp 0.6s ease-out forwards"
+    animation: "heartbeat 2.5s infinite ease-in-out, fadeSlideUp 0.6s ease-out forwards"
   });
 
   // -------------------------------------------------------
-  // ✅ BUTTONS INCLUDING NEW “IDEAS” BUTTON
+  // ✅ Single Button — OPEN UPDATES
   // -------------------------------------------------------
-  const buttons = [
-    {
-      text: "🔥 Blog",
-      bg: "#1e90ff",
-      url: "https://beatzde4.blogspot.com/"
-    },
-    {
-      text: "📌 Feed",
-      bg: "#16a34a",
-      url: "https://debeatzgh.wordpress.com/"
-    },
-    {
-      text: "💡 Ideas",
-      bg: "#c026d3",
-      url: "https://msha.ke/debeatzgh"
-    }
-  ];
+  const button = document.createElement("a");
+  button.href = "#";
+  button.innerText = "📌 Updates";
+  Object.assign(button.style, {
+    background: "#16a34a",
+    color: "#fff",
+    padding: "12px 24px",
+    borderRadius: "30px",
+    textDecoration: "none",
+    fontSize: "15px",
+    fontWeight: "700",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.25)",
+    whiteSpace: "nowrap",
+  });
 
-  // 🔹 Create Iframe Modal
+  // 🔹 Iframe Modal
   const modal = document.createElement("div");
   modal.id = "iframe-modal";
   modal.innerHTML = `
@@ -118,35 +112,17 @@ document.addEventListener("DOMContentLoaded", function () {
       <iframe id="modal-iframe" src="" loading="lazy"></iframe>
     </div>
   `;
+
   document.body.appendChild(modal);
 
-  // 🔹 Add Buttons to Page
-  buttons.forEach(function (btn) {
-    const a = document.createElement("a");
-    a.href = "#";
-    a.innerText = btn.text;
-    Object.assign(a.style, {
-      background: btn.bg,
-      color: "#fff",
-      padding: "8px 14px",
-      borderRadius: "20px",
-      textDecoration: "none",
-      fontSize: "13px",
-      fontWeight: "600",
-      whiteSpace: "nowrap",
-      boxShadow: "0 2px 6px rgba(0, 0, 0, 0.2)",
-      transition: "opacity 0.3s ease, transform 0.3s ease"
-    });
-
-    a.addEventListener("click", function (e) {
-      e.preventDefault();
-      document.getElementById("modal-iframe").src = btn.url;
-      document.getElementById("iframe-modal").style.display = "block";
-    });
-
-    btnGroup.appendChild(a);
+  // 🔹 Button Click → Open Site in Iframe
+  button.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("modal-iframe").src = "https://debeatzgh1.github.io/Digital-Creator-s-Essential-Guides-Tools/";
+    document.getElementById("iframe-modal").style.display = "block";
   });
 
+  btnGroup.appendChild(button);
   document.body.appendChild(btnGroup);
 
   // 🔹 Close Modal
@@ -157,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // 🔹 Auto-open external ads in new tab safely
+  // 🔹 Auto-open external ads in new tab
   document.getElementById("modal-iframe").addEventListener("load", function () {
     try {
       const links = this.contentDocument.querySelectorAll("a");
@@ -175,12 +151,13 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-# **👋 Hi, I'm David Kumah (DebeatzGH)**
+
+# **👋 Hi, I'm David (DebeatzGH)**
 
 ### *AI Tools Builder • UI/UX Creator • Digital Products Developer • Tech Blogger*
 
 <p align="center">
-  <img src="https://github.com/debeatzgh1.png" width="140" style="border-radius:50%">
+  <img src="https://debeatzgh.wordpress.com/wp-content/uploads/2025/12/imagine_15462143230908918843052169799993526.jpg" width="140" style="border-radius:50%">
 </p>
 
 ---
