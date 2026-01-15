@@ -92,7 +92,7 @@ footer{font-size:11px;text-align:center;opacity:.6;padding:6px}
     <h3>Navigation</h3>
     <button onclick="showBlogs()">📰 Blog</button>
     <button onclick="openContent('https://debeatzgh1.github.io/-My-Brand-Online-Digital-Products-Affiliate-Shop/')">🛒 Products</button>
-    <button onclick="openContent('https://debeatzgh1.github.io/The-Ultimate-Guide-to-Side-Hustle/')">🚀 Side Hustles</button>
+    <button onclick="openContent('https://debeatzgh1.github.io/debeatzgh/')">🚀 Tools</button>
     <button onclick="openContent('https://msha.ke/debeatzgh')">🔗 Milkshake</button>
   </div>
 </div>
@@ -101,7 +101,7 @@ footer{font-size:11px;text-align:center;opacity:.6;padding:6px}
 <div class="tabs">
   <button onclick="showBlogs()">📰 Blog</button>
   <button onclick="openContent('https://debeatzgh1.github.io/-My-Brand-Online-Digital-Products-Affiliate-Shop/')">🛒 Products</button>
-  <button onclick="openContent('https://debeatzgh1.github.io/The-Ultimate-Guide-to-Side-Hustle/')">🚀 Hustles</button>
+  <button onclick="openContent('https://debeatzgh1.github.io/')">🚀 Tools</button>
   <button onclick="openContent('https://msha.ke/debeatzgh')">🔗 Links</button>
 </div>
 
