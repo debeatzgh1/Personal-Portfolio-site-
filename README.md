@@ -166,7 +166,7 @@ footer{
 
 <header>
   <button onclick="toggleMenu()">☰</button>
-  <h1>David Kumah</h1>
+  <h1>My links</h1>
   <button onclick="toggleTheme()">🌗</button>
 </header>
 
@@ -174,7 +174,7 @@ footer{
 <div class="menu" id="menu" onclick="toggleMenu()">
   <div class="menu-panel" onclick="event.stopPropagation()">
     <h3>Navigation</h3>
-    <button onclick="openContent('https://debeatzgh1.github.io/Home-/')">🤖 AI Hub</button>
+    <button onclick="openContent('https://debeatzgh1.github.io/1/')">🤖 AI Hub</button>
     <button onclick="openContent('https://debeatzgh1.github.io/-My-Brand-Online-Digital-Products-Affiliate-Shop/')">🛒 Products</button>
     <button onclick="openContent('https://debeatzgh1.github.io/The-Ultimate-Guide-to-Side-Hustle/')">🚀 Side Hustles</button>
     <button onclick="showBlogs()">📰 Latest Blogs</button>
@@ -187,7 +187,7 @@ footer{
   <button onclick="openContent('https://debeatzgh1.github.io/-My-Brand-Online-Digital-Products-Affiliate-Shop/')">🛒 Products</button>
   <button onclick="openContent('https://debeatzgh1.github.io/The-Ultimate-Guide-to-Side-Hustle/')">🚀 Hustles</button>
   <button onclick="showBlogs()">📰 Blogs</button>
-  <button onclick="openExternal('https://milkshake.app/')">🔗 Links</button>
+  <button onclick="openInternal('https://debeatzgh1.github.io/1//')">🔗 Links</button>
 </div>
 
 <!-- VIEW -->
