@@ -82,7 +82,7 @@ footer{font-size:11px;text-align:center;opacity:.6;padding:6px}
 
 <header>
   <button onclick="toggleMenu()">☰</button>
-  <h1>David Kumah</h1>
+  <h1>My links</h1>
   <button onclick="toggleTheme()">🌗</button>
 </header>
 
@@ -93,7 +93,7 @@ footer{font-size:11px;text-align:center;opacity:.6;padding:6px}
     <button onclick="showBlogs()">📰 Blog</button>
     <button onclick="openContent('https://debeatzgh1.github.io/-My-Brand-Online-Digital-Products-Affiliate-Shop/')">🛒 Products</button>
     <button onclick="openContent('https://debeatzgh1.github.io/The-Ultimate-Guide-to-Side-Hustle/')">🚀 Side Hustles</button>
-    <button onclick="openContent('https://milkshake.app/')">🔗 Milkshake</button>
+    <button onclick="openContent('https://milkshake.debeatzgh/')">🔗 Milkshake</button>
   </div>
 </div>
 
