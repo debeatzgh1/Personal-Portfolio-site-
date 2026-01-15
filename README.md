@@ -192,7 +192,7 @@ footer{
 
 <!-- VIEW -->
 <div class="viewer" id="viewerBox">
-  <iframe id="viewer" src="https://debeatzgh1.github.io/Home-/"></iframe>
+  <iframe id="viewer" src="https://debeatzgh1.github.io/debeatzgh/-/"></iframe>
 </div>
 
 <footer>
