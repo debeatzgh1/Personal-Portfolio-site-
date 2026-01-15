@@ -174,7 +174,7 @@ footer{
 <div class="menu" id="menu" onclick="toggleMenu()">
   <div class="menu-panel" onclick="event.stopPropagation()">
     <h3>Navigation</h3>
-    <button onclick="openContent('https://debeatzgh1.github.io/1/')">🤖 AI Hub</button>
+    <button onclick="openContent('https://debeatzgh1.github.io/debeatzgh/')">🤖 AI Hub</button>
     <button onclick="openContent('https://debeatzgh1.github.io/-My-Brand-Online-Digital-Products-Affiliate-Shop/')">🛒 Products</button>
     <button onclick="openContent('https://debeatzgh1.github.io/The-Ultimate-Guide-to-Side-Hustle/')">🚀 Side Hustles</button>
     <button onclick="showBlogs()">📰 Latest Blogs</button>
@@ -208,7 +208,7 @@ function openContent(url){
   box.innerHTML = `<iframe id="viewer" src="${url}"></iframe>`;
 }
 
-function openExternal(url){
+function openContent(url){
   window.open(url,'_blank');
 }
 
