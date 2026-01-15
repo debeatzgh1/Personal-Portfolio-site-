@@ -1,3 +1,4 @@
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -166,7 +167,7 @@ footer{
 
 <header>
   <button onclick="toggleMenu()">☰</button>
-  <h1>My links</h1>
+  <h1>MY LINKS</h1>
   <button onclick="toggleTheme()">🌗</button>
 </header>
 
@@ -174,7 +175,7 @@ footer{
 <div class="menu" id="menu" onclick="toggleMenu()">
   <div class="menu-panel" onclick="event.stopPropagation()">
     <h3>Navigation</h3>
-    <button onclick="openContent('https://debeatzgh1.github.io/debeatzgh/')">🤖 AI Hub</button>
+    <button onclick="openContent('https://debeatzgh1.github.io/sales-/')">🤖 AI Hub</button>
     <button onclick="openContent('https://debeatzgh1.github.io/-My-Brand-Online-Digital-Products-Affiliate-Shop/')">🛒 Products</button>
     <button onclick="openContent('https://debeatzgh1.github.io/The-Ultimate-Guide-to-Side-Hustle/')">🚀 Side Hustles</button>
     <button onclick="showBlogs()">📰 Latest Blogs</button>
@@ -183,16 +184,16 @@ footer{
 
 <!-- TABS -->
 <div class="tabs">
-  <button onclick="openContent('https://debeatzgh1.github.io/1/-/')">🤖 AI</button>
+  <button onclick="openContent('https://debeatzgh1.github.io/sales/')">🤖 AI</button>
   <button onclick="openContent('https://debeatzgh1.github.io/-My-Brand-Online-Digital-Products-Affiliate-Shop/')">🛒 Products</button>
   <button onclick="openContent('https://debeatzgh1.github.io/The-Ultimate-Guide-to-Side-Hustle/')">🚀 Hustles</button>
   <button onclick="showBlogs()">📰 Blogs</button>
-  <button onclick="openContent('https://debeatzgh1.github.io/1//')">🔗 Links</button>
+  <button onclick="openContent('https://debeatzgh1.github.io/debeatzgh/-/')">🔗 Links</button>
 </div>
 
 <!-- VIEW -->
 <div class="viewer" id="viewerBox">
-  <iframe id="viewer" src="https://debeatzgh1.github.io/debeatzgh/-/"></iframe>
+  <iframe id="viewer" src="https://debeatzgh1.github.io/debeatzgh/"></iframe>
 </div>
 
 <footer>
@@ -213,7 +214,7 @@ function openContent(url){
 }
 
 /* BLOG FEEDS */
-function showBlogs(){
+function OpenContent(url){
   box.innerHTML = `<div class="feed" id="feed">Loading latest posts...</div>`;
   loadFeed('https://debeatzgh.wordpress.com/feed/');
   loadFeed('http://beatzde4.blogspot.com/feeds/posts/default?alt=rss');
