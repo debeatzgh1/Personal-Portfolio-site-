@@ -165,3 +165,75 @@ if(localStorage.theme==='light')document.body.classList.add('light');
 
 </body>
 </html>
+
+<div id="booking-fab" style="position: fixed; bottom: 30px; left: 30px; z-index: 1000;">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdipVP7tU1hjTjECfWUdnhzWN-PROdQp19ng25EUDJk5-8JzA/viewform?usp=header" target="_blank" style="text-decoration: none;">
+        <div style="background: #28a745; color: white; padding: 15px 25px; border-radius: 50px; display: flex; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: transform 0.3s ease;">
+            <span style="margin-right: 10px; font-size: 1.2rem;">📅</span>
+            <span style="font-weight: bold; font-family: sans-serif;">Book Discovery Call</span>
+        </div>
+    </a>
+</div>
+
+<style>
+    #booking-fab div:hover {
+        transform: scale(1.05);
+        background: #218838;
+    }
+    /* Mobile adjustment */
+    @media (max-width: 600px) {
+        #booking-fab {
+            bottom: 20px;
+            right: 20px;
+        }
+        #booking-fab span:last-child {
+            display: none; /* Shows only the icon on small screens to save space */
+        }
+        #booking-fab div {
+            padding: 15px;
+            border-radius: 50%;
+        }
+    }
+</style><div id="calculator-container" style="font-family: sans-serif; max-width: 400px; border: 1px solid #ddd; padding: 20px; border-radius: 12px; background: #ffo; shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    <h3 style="margin-top: 0; color: #333;">Project Estimator</h3>
+    <p style="font-size: 0.9rem; color: #666;">Select the services you need:</p>
+    
+    <div style="margin-bottom: 15px;">
+        <label style="display: block; margin-bottom: 8px;">
+            <input type="checkbox" class="service-item" data-price="500" onchange="calculateTotal()" /> Landing Page Design (¢850)
+        </label>
+        <label style="display: block; margin-bottom: 8px;">
+            <input type="checkbox" class="service-item" data-price="1200" onchange="calculateTotal()" /> E-commerce Setup (¢1,200)
+        </label>
+        <label style="display: block; margin-bottom: 8px;">
+            <input type="checkbox" class="service-item" data-price="300" onchange="calculateTotal()" /> SEO Optimization (¢300)
+        </label>
+        <label style="display: block; margin-bottom: 8px;">
+            <input type="checkbox" class="service-item" data-price="800" onchange="calculateTotal()" /> Custom web app design (¢900)
+        </label>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #eee;" />
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+        <span style="font-weight: bold; font-size: 1.1rem;">Estimated Total:</span>
+        <span id="total-price" style="font-size: 1.4rem; color: #007bff; font-weight: bold;">¢0</span>
+    </div>
+
+    <button onclick="location.href='mailto: debeatz4@gmail.com?subject=Project Quote'" style="width: 100%; margin-top: 20px; padding: 12px; background: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">
+        Request Formal Quote
+    </button>
+</div>
+
+<script>
+    function calculateTotal() {
+        let total = 0;
+        const checkboxes = document.querySelectorAll('.service-item');
+        checkboxes.forEach(item => {
+            if (item.checked) {
+                total += parseInt(item.getAttribute('data-price'));
+            }
+        });
+        document.getElementById('total-price').innerText = '¢' + total.toLocaleString();
+    }
+</script>
