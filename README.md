@@ -167,7 +167,7 @@ if(localStorage.theme==='light')document.body.classList.add('light');
 </html>
 
 <div id="booking-fab" style="position: fixed; bottom: 30px; left: 30px; z-index: 1000;">
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdipVP7tU1hjTjECfWUdnhzWN-PROdQp19ng25EUDJk5-8JzA/viewform?usp=header" target="_blank" style="text-decoration: none;">
+    <a href="https://debeatzgh1.github.io/Home-/" target="_blank" style="text-decoration: none;">
         <div style="background: #28a745; color: white; padding: 15px 25px; border-radius: 50px; display: flex; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: transform 0.3s ease;">
             <span style="margin-right: 10px; font-size: 1.2rem;">📅</span>
             <span style="font-weight: bold; font-family: sans-serif;">Book Discovery Call</span>
