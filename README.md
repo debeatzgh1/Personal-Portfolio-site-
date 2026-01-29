@@ -255,7 +255,7 @@ if(localStorage.theme==='light')document.body.classList.add('light');
   #floatingMenu {
     position: fixed;
     top: 50%;
-    right: 20px;
+    right: 15px;
     transform: translateY(-50%);
     z-index: 9999;
   }
@@ -266,8 +266,8 @@ if(localStorage.theme==='light')document.body.classList.add('light');
     color: #fff;
     border: none;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     font-size: 26px;
     cursor: pointer;
     box-shadow: 0 10px 25px rgba(37,99,235,.45);
