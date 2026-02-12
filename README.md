@@ -1,4 +1,6 @@
-
+<!-- Elfsight All-in-One Chat | All-in-One Chat -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-477d870c-bbce-4a1c-bcfe-6928b9aa363c" data-elfsight-app-lazy></div>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
