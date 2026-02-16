@@ -1,3 +1,199 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --banner-bg: rgba(13, 17, 23, 0.85);
+            --accent-pink: #FF1493;
+            --accent-glow: rgba(255, 20, 147, 0.4);
+            --text-white: #ffffff;
+            --border-glass: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Floating Banner Container */
+        .top-floating-banner {
+            position: fixed;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 700px;
+            height: 50px;
+            background: var(--banner-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glass);
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px 0 25px;
+            z-index: 10000;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            animation: slideDown 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Carousel Wrapper */
+        .carousel-wrapper {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            margin-right: 15px;
+        }
+
+        .carousel-content {
+            display: flex;
+            white-space: nowrap;
+            animation: scrollText 15s linear infinite;
+        }
+
+        .carousel-content span {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-white);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Launch Button */
+        .banner-btn {
+            background: var(--accent-pink);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 0 15px var(--accent-glow);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .banner-btn:hover {
+            transform: scale(1.05);
+            background: #ff69b4;
+            box-shadow: 0 0 25px var(--accent-glow);
+        }
+
+        /* Modal Overlay for Milkshake */
+        #milkshake-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            z-index: 10001;
+            flex-direction: column;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-header {
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #161b22;
+        }
+
+        .close-btn {
+            background: #f85149;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #msha-iframe {
+            width: 100%;
+            flex-grow: 1;
+            border: none;
+        }
+
+        /* Animations */
+        @keyframes scrollText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        @keyframes slideDown {
+            from { transform: translate(-50%, -100px); opacity: 0; }
+            to { transform: translate(-50%, 0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            .carousel-content span { font-size: 0.75rem; }
+            .banner-btn span { display: none; }
+            .banner-btn { padding: 8px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-floating-banner">
+        <div class="carousel-wrapper">
+            <div class="carousel-content">
+                <span>
+                    💻 Access your lifestyle, productivity tools and ideas All in one place! 🚀 💡 📈
+                </span>
+            </div>
+        </div>
+        
+        <button class="banner-btn" onclick="openMilkshake()">
+            <span>Launch Hub</span> ⭐️
+        </button>
+    </div>
+
+    <div id="milkshake-modal">
+        <div class="modal-header">
+            <span style="color:white; font-family: sans-serif; font-weight: bold;">Debeatzgh Hub</span>
+            <button class="close-btn" onclick="closeMilkshake()">✕ Close</button>
+        </div>
+        <iframe id="msha-iframe" src=""></iframe>
+    </div>
+
+    <script>
+        function openMilkshake() {
+            const modal = document.getElementById('milkshake-modal');
+            const iframe = document.getElementById('msha-iframe');
+            
+            // Set source only when clicked to save performance
+            iframe.src = "https://msha.ke/debeatzgh";
+            modal.style.display = "flex";
+            document.body.style.overflow = "hidden"; // Disable scroll
+        }
+
+        function closeMilkshake() {
+            const modal = document.getElementById('milkshake-modal');
+            const iframe = document.getElementById('msha-iframe');
+            
+            modal.style.display = "none";
+            iframe.src = ""; // Stop the iframe content
+            document.body.style.overflow = "auto"; // Re-enable scroll
+        }
+    </script>
+
+</body>
+</html>
+
+
+
 <!-- Elfsight All-in-One Chat | All-in-One Chat -->
 <script src="https://elfsightcdn.com/platform.js" async></script>
 <div class="elfsight-app-477d870c-bbce-4a1c-bcfe-6928b9aa363c" data-elfsight-app-lazy></div>
