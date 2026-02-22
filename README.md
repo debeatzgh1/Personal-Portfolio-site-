@@ -1,4 +1,215 @@
 
+
+
+    
+    
+    Creator OS | Matrix Hub
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=JetBrains+Mono:wght@400;700&display=swap');
+        
+        :root {
+            --notify-red: #ff3e3e;
+            --gist-blue: #58a6ff;
+            --glass-dark: rgba(10, 15, 28, 0.9);
+        }
+
+        body { background: #02040a; color: #e2e8f0; font-family: 'Space Grotesk', sans-serif; overflow: hidden; margin: 0; }
+        #bg-canvas { position: fixed; inset: 0; z-index: -1; }
+        .glass { background: var(--glass-dark); backdrop-filter: blur(20px); border: 1px solid rgba(56, 189, 248, 0.1); }
+
+        /* --- LEFT MIDDLE NOTIFICATION --- */
+        #notification-wrapper {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        #gist-notifier {
+            width: 45px; /* Shrunk size */
+            height: 45px;
+            background: var(--glass-dark);
+            border: 1px solid rgba(88, 166, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(88, 166, 255, 0.2);
+            order: 1; /* Bell on left */
+            position: relative;
+        }
+
+        #notify-bubble {
+            background: #fff;
+            color: #0d1117;
+            padding: 8px 15px;
+            border-radius: 10px;
+            margin-left: 12px; /* Gap from left bell */
+            font-size: 11px;
+            font-weight: 800;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: 0.4s;
+            white-space: nowrap;
+            order: 2; /* Text on right of bell */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            pointer-events: none;
+        }
+        #notify-bubble.show { opacity: 1; transform: translateX(0); }
+
+        /* --- HUB LAUNCHER (MINI) --- */
+        #hub-launcher {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--glass-dark);
+            color: var(--gist-blue);
+            padding: 15px 8px;
+            border-radius: 0 10px 10px 0;
+            font-size: 9px;
+            font-weight: 900;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            letter-spacing: 2px;
+            border: 1px solid rgba(88, 166, 255, 0.2);
+            border-left: none;
+            cursor: pointer;
+            display: none;
+            z-index: 9998;
+            transition: 0.3s;
+        }
+        #hub-launcher:hover { background: var(--gist-blue); color: #000; }
+
+        /* --- FORM OVERLAY --- */
+        #gist-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); display: none; z-index: 10000; justify-content: center; align-items: center; }
+        .modal-container { width: 95%; max-width: 600px; height: 85vh; background: #0d1117; border-radius: 20px; display: flex; flex-direction: column; border: 1px solid #30363d; overflow: hidden; }
+        iframe { width: 100%; height: 100%; border: none; display: none; }
+        
+        .spinner-box { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 15px; }
+        .spinner { width: 30px; height: 30px; border: 2px solid rgba(88, 166, 255, 0.1); border-top: 2px solid var(--gist-blue); border-radius: 50%; animation: spin 0.8s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        @keyframes shake { 0%, 100% { transform: rotate(0); } 20% { transform: rotate(10deg); } 40% { transform: rotate(-10deg); } }
+        .shake { animation: shake 0.5s ease-in-out; }
+    </style>
+
+
+
+    <audio id="notify-sound" src="https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3"></audio>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <div id="main-ui" class="max-w-4xl mx-auto px-6 pt-20">
+        <h1 class="text-4xl font-black text-white">MATRIX_<span class="text-cyan-500">OS</span></h1>
+        <p class="text-slate-500 text-xs mt-2 tracking-widest">SYSTEM STATUS: NOMINAL</p>
+    </div>
+
+    <div id="notification-wrapper">
+        <div id="gist-notifier" onclick="handleFormLaunch()">
+            <span id="comment-badge" class="absolute -top-1 -right-1 bg-red-500 w-3 h-3 rounded-full hidden"></span>
+            <svg width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="#58a6ff" stroke-width="2.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+        </div>
+        <div id="notify-bubble"><span id="type-text"></span></div>
+    </div>
+
+    <button id="hub-launcher" onclick="handleFormLaunch()">OPEN_INPUT_FORM</button>
+
+    <div id="gist-overlay">
+        <div class="modal-container">
+            <div class="flex justify-between items-center p-4 bg-[#161b22] border-b border-[#30363d]">
+                <span class="text-[9px] font-bold text-slate-500 tracking-widest uppercase">Secure_Form_Channel</span>
+                <button onclick="closeOverlay()" class="text-white text-xl">&times;</button>
+            </div>
+            <div id="form-loader" class="spinner-box">
+                <div class="spinner"></div>
+                <div class="text-[9px] text-cyan-500 font-bold uppercase tracking-tighter">Connecting to Server...</div>
+            </div>
+            <iframe id="form-iframe" src=""></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Background Particles
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function initBg() {
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            particles = Array.from({length: 40}, () => ({
+                x: Math.random()*canvas.width, y: Math.random()*canvas.height,
+                vx: (Math.random()-0.5)*0.2, vy: (Math.random()-0.5)*0.2
+            }));
+        }
+        function animateBg() {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            particles.forEach(p => {
+                p.x += p.vx; p.y += p.vy;
+                if(p.x<0||p.x>canvas.width) p.vx*=-1;
+                if(p.y<0||p.y>canvas.height) p.vy*=-1;
+                ctx.fillStyle = 'rgba(88,166,255,0.1)';
+                ctx.beginPath(); ctx.arc(p.x, p.y, 1, 0, Math.PI*2); ctx.fill();
+            });
+            requestAnimationFrame(animateBg);
+        }
+
+        // Typewriter logic
+        function typeWriter(text, i=0) {
+            if (i < text.length) {
+                document.getElementById('type-text').innerHTML += text.charAt(i);
+                setTimeout(() => typeWriter(text, i+1), 40);
+            }
+        }
+
+        function checkNotification() {
+            if (localStorage.getItem('form_seen')) {
+                document.getElementById('notification-wrapper').style.display = 'none';
+                document.getElementById('hub-launcher').style.display = 'block';
+            } else {
+                setTimeout(() => {
+                    document.getElementById('notify-bubble').classList.add('show');
+                    document.getElementById('comment-badge').classList.remove('hidden');
+                    document.getElementById('gist-notifier').classList.add('shake');
+                    typeWriter(" comment /Request...");
+                    document.addEventListener('mouseover', () => { document.getElementById('notify-sound').play().catch(()=>{}) }, {once:true});
+                }, 1500);
+            }
+        }
+
+        function handleFormLaunch() {
+            const iframe = document.getElementById('form-iframe');
+            const overlay = document.getElementById('gist-overlay');
+            const loader = document.getElementById('form-loader');
+            
+            overlay.style.display = 'flex';
+            if (iframe.src === "" || iframe.src !== "https://form.svhrt.com/60f4a0aeedc1993c8c7b3989") {
+                iframe.src = "https://form.svhrt.com/60f4a0aeedc1993c8c7b3989";
+                iframe.onload = () => {
+                    loader.style.display = 'none';
+                    iframe.style.display = 'block';
+                };
+            }
+            
+            localStorage.setItem('form_seen', 'true');
+            document.getElementById('notification-wrapper').style.display = 'none';
+            document.getElementById('hub-launcher').style.display = 'block';
+        }
+
+        function closeOverlay() { document.getElementById('gist-overlay').style.display = 'none'; }
+
+        window.onload = () => { initBg(); animateBg(); checkNotification(); };
+        window.onresize = initBg;
+    </script>
+
+</!doctype>
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
