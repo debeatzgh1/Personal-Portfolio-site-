@@ -1,801 +1,150 @@
+# 💎 Digital Ecosystem
+**Professional Software Development & AI Content Strategy Hub**
+
+This repository serves as the central command center for the eg **DeBeatzGH** brand. It features a high-end, responsive UI built with Tailwind CSS and a custom JavaScript-driven overlay system.
+
+## 🚀 Key Features
+- **Master Overlay Engine:** Opens external tools (WordPress Signup, Firebase Distribution, Sales Shop) in a professional, branded iframe without leaving the site.
+- **Glassmorphic Bento Grid:** A modern layout showcasing services like Custom Dev, AI Automation, and Passive Income Blueprints.
+- **Smart Dock:** A persistent floating navigation bar for mobile-first user engagement.
+- **Session Intelligence:** Uses `localStorage` to ensure popups are non-intrusive and respect the user's journey.
+
+## 🛠️ Tech Stack
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Icons:** [FontAwesome](https://fontawesome.com/)
+- **Typography:** Plus Jakarta Sans & JetBrains Mono
+- **Deployment:** GitHub Pages
+
+## 📂 Architecture
+- `index.html`: Main landing page and UI logic.
+- `Blogger-sign-up-button/`: Repository for WordPress subdomain claims.
+- `Side-hustle-starter-kit/`: Educational resource distribution.
+
+## ⚖️ Legal & Privacy
+This site uses local storage to optimize performance and track session status for authentication popups. No personal data is stored outside the user's browser.
+
+---
+© 2026  Engineered for Performance.
+
+
+
+
 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeBeatzGH | Software Developer & AI Strategist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --banner-bg: rgba(13, 17, 23, 0.85);
-            --accent-pink: #FF1493;
-            --accent-glow: rgba(255, 20, 147, 0.4);
-            --text-white: #ffffff;
-            --border-glass: rgba(255, 255, 255, 0.1);
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=JetBrains+Mono&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #030712; color: #f0f6fc; overflow-x: hidden; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .text-gradient { background: linear-gradient(to right, #22d3ee, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Master Overlay Styles */
+        #master-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(15px); z-index: 50000; display: none; flex-direction: column;
         }
-
-        /* Floating Banner Container */
-        .top-floating-banner {
-            position: fixed;
-            top: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 700px;
-            height: 50px;
-            background: var(--banner-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--border-glass);
-            border-radius: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 10px 0 25px;
-            z-index: 10000;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-            overflow: hidden;
-            animation: slideDown 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        /* Carousel Wrapper */
-        .carousel-wrapper {
-            flex: 1;
-            overflow: hidden;
-            position: relative;
-            margin-right: 15px;
-        }
-
-        .carousel-content {
-            display: flex;
-            white-space: nowrap;
-            animation: scrollText 15s linear infinite;
-        }
-
-        .carousel-content span {
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            font-size: 0.85rem;
-            color: var(--text-white);
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* Launch Button */
-        .banner-btn {
-            background: var(--accent-pink);
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 0 15px var(--accent-glow);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .banner-btn:hover {
-            transform: scale(1.05);
-            background: #ff69b4;
-            box-shadow: 0 0 25px var(--accent-glow);
-        }
-
-        /* Modal Overlay for Milkshake */
-        #milkshake-modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.9);
-            display: none;
-            z-index: 10001;
-            flex-direction: column;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal-header {
-            padding: 15px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #161b22;
-        }
-
-        .close-btn {
-            background: #f85149;
-            color: white;
-            border: none;
-            padding: 5px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        #msha-iframe {
-            width: 100%;
-            flex-grow: 1;
-            border: none;
-        }
-
-        /* Animations */
-        @keyframes scrollText {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-
-        @keyframes slideDown {
-            from { transform: translate(-50%, -100px); opacity: 0; }
-            to { transform: translate(-50%, 0); opacity: 1; }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Mobile Adjustments */
-        @media (max-width: 600px) {
-            .carousel-content span { font-size: 0.75rem; }
-            .banner-btn span { display: none; }
-            .banner-btn { padding: 8px 12px; }
-        }
+        .loader-bar { height: 2px; width: 0%; background: #00f2ff; position: absolute; top: 0; transition: width 0.5s; }
     </style>
 </head>
 <body>
 
-    <div class="top-floating-banner">
-        <div class="carousel-wrapper">
-            <div class="carousel-content">
-                <span>
-                    💻 Access your lifestyle, productivity tools and ideas All in one place! 🚀 💡 📈
-                </span>
-            </div>
-        </div>
-        
-        <button class="banner-btn" onclick="openMilkshake()">
-            <span>Launch Hub</span> ⭐️
-        </button>
+    <div class="fixed inset-0 -z-10">
+        <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(6,182,212,0.1),transparent_50%)]"></div>
     </div>
 
-    <div id="milkshake-modal">
-        <div class="modal-header">
-            <span style="color:white; font-family: sans-serif; font-weight: bold;">Debeatzgh Hub</span>
-            <button class="close-btn" onclick="closeMilkshake()">✕ Close</button>
+    <nav class="flex justify-between items-center px-8 py-6 max-w-7xl mx-auto">
+        <div class="text-xl font-black tracking-tighter uppercase">DeBeatz<span class="text-cyan-400">GH</span></div>
+        <div class="hidden md:flex space-x-8 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+            <a href="https://beatzde4.blogspot.com" class="hover:text-cyan-400 transition">Blog</a>
+            <a href="https://debeatzgh1.github.io/sales" class="hover:text-cyan-400 transition">Shop</a>
+            <a href="#services" class="hover:text-cyan-400 transition">Services</a>
         </div>
-        <iframe id="msha-iframe" src=""></iframe>
+        <button onclick="openGlobalOverlay('https://debeatzgh1.github.io/Blogger-sign-up-button-/')" class="glass px-6 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest border-cyan-500/30 hover:bg-cyan-500/10 transition">Sign Up</button>
+    </nav>
+
+    <header class="max-w-4xl mx-auto text-center pt-20 pb-20 px-6">
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tighter leading-tight">
+            The AI Prompt <span class="text-gradient">Advantage</span>
+        </h1>
+        <p class="text-slate-400 mb-10 max-w-xl mx-auto text-sm leading-relaxed">
+            Professional software development and AI-driven content strategies for the modern digital ecosystem.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+            <button onclick="openGlobalOverlay('https://debeatzgh1.github.io/Side-hustle-starter-kit-/')" class="bg-cyan-500 text-slate-950 px-8 py-4 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:scale-105 transition">Start Hustle Kit</button>
+            <button onclick="openGlobalOverlay('https://appdistribution.firebase.dev/i/dc2da2d4d3766b8a')" class="glass px-8 py-4 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-white/5 transition">Get App Build</button>
+        </div>
+    </header>
+
+    <section id="services" class="max-w-6xl mx-auto px-6 pb-40 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="md:col-span-2 glass p-10 rounded-[2.5rem] flex flex-col justify-end min-h-[300px]">
+            <h3 class="text-2xl font-bold mb-2">Custom Software Dev</h3>
+            <p class="text-slate-500 text-xs">Responsive UI components, Tailwind CSS integration, and cross-platform mobile app development.</p>
+        </div>
+        <div class="glass p-10 rounded-[2.5rem] border-cyan-500/20">
+            <i class="fas fa-robot text-cyan-400 text-2xl mb-6"></i>
+            <h3 class="text-lg font-bold mb-2 uppercase italic">AI Automation</h3>
+            <p class="text-slate-500 text-[11px]">Streamlining content workflows with high-level prompt engineering.</p>
+        </div>
+    </section>
+
+    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-md glass p-3 rounded-2xl flex items-center justify-between z-40">
+        <div class="flex items-center gap-3">
+            <div class="w-2 h-2 bg-green-500 rounded-full animate-ping"></div>
+            <span class="text-[10px] font-bold uppercase tracking-tighter text-slate-400">Network Active</span>
+        </div>
+        <button onclick="openGlobalOverlay('https://debeatzgh1.github.io/me-/')" class="bg-white text-black px-4 py-2 rounded-xl text-[9px] font-black uppercase">Open Hub</button>
+    </div>
+
+    <div id="master-overlay">
+        <div class="loader-bar" id="load-bar"></div>
+        <div class="p-4 border-b border-white/5 flex justify-between items-center">
+            <span class="text-[9px] font-mono text-cyan-500 uppercase">Secure_Portal // DeBeatzGH_Link</span>
+            <button id="close-btn" class="bg-red-500/10 text-red-500 px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase disabled:opacity-50">Wait (3s)</button>
+        </div>
+        <iframe id="master-frame" class="w-full flex-grow" src=""></iframe>
     </div>
 
     <script>
-        function openMilkshake() {
-            const modal = document.getElementById('milkshake-modal');
-            const iframe = document.getElementById('msha-iframe');
+        const overlay = document.getElementById('master-overlay');
+        const frame = document.getElementById('master-frame');
+        const closeBtn = document.getElementById('close-btn');
+        const loadBar = document.getElementById('load-bar');
+
+        function openGlobalOverlay(url) {
+            frame.src = url;
+            overlay.style.display = 'flex';
+            loadBar.style.width = '100%';
             
-            // Set source only when clicked to save performance
-            iframe.src = "https://msha.ke/debeatzgh";
-            modal.style.display = "flex";
-            document.body.style.overflow = "hidden"; // Disable scroll
-        }
-
-        function closeMilkshake() {
-            const modal = document.getElementById('milkshake-modal');
-            const iframe = document.getElementById('msha-iframe');
+            let sec = 3;
+            closeBtn.disabled = true;
+            closeBtn.innerText = `Wait (${sec}s)`;
             
-            modal.style.display = "none";
-            iframe.src = ""; // Stop the iframe content
-            document.body.style.overflow = "auto"; // Re-enable scroll
+            const timer = setInterval(() => {
+                sec--;
+                if(sec > 0) { closeBtn.innerText = `Wait (${sec}s)`; }
+                else {
+                    clearInterval(timer);
+                    closeBtn.disabled = false;
+                    closeBtn.innerText = "Close [X]";
+                    closeBtn.onclick = () => { overlay.style.display = 'none'; frame.src = ''; loadBar.style.width = '0%'; };
+                }
+            }, 1000);
         }
-    </script>
 
-</body>
-</html>
-
-
-
-<!-- Elfsight All-in-One Chat | All-in-One Chat -->
-<script src="https://elfsightcdn.com/platform.js" async></script>
-<div class="elfsight-app-477d870c-bbce-4a1c-bcfe-6928b9aa363c" data-elfsight-app-lazy></div>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>David Kumah | Digital Entrepreneur</title>
-
-<style>
-:root{
-  --bg:#020617;
-  --panel:#0f172a;
-  --card:#111827;
-  --text:#e5e7eb;
-  --accent:#38bdf8;
-}
-.light{
-  --bg:#f8fafc;
-  --panel:#ffffff;
-  --card:#f1f5f9;
-  --text:#0f172a;
-  --accent:#0284c7;
-}
-*{box-sizing:border-box;font-family:system-ui}
-body{margin:0;background:var(--bg);color:var(--text);}
-
-/* HEADER */
-header{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:12px 14px;border-bottom:1px solid #1f2937;
-  background:var(--panel);
-}
-header h1{font-size:16px;margin:0}
-header button{background:none;border:none;color:var(--text);font-size:18px;cursor:pointer}
-
-/* MOBILE MENU */
-.menu{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;z-index:99}
-.menu.active{display:block}
-.menu-panel{
-  width:260px;height:100%;background:var(--panel);
-  padding:16px;animation:slide .3s ease
-}
-@keyframes slide{from{transform:translateX(-100%)}to{transform:translateX(0)}}
-.menu-panel h3{margin-top:0;font-size:14px}
-.menu-panel button{
-  display:block;width:100%;margin-bottom:8px;
-  padding:10px;border-radius:10px;
-  border:1px solid #1f2937;background:var(--card);
-  color:var(--text);text-align:left
-}
-
-/* TABS */
-.tabs{
-  display:flex;gap:8px;padding:10px;overflow-x:auto;
-  background:var(--panel);border-bottom:1px solid #1f2937
-}
-.tabs button{
-  display:flex;align-items:center;gap:6px;
-  background:var(--card);border:1px solid #1f2937;
-  color:var(--text);padding:8px 12px;
-  border-radius:10px;font-size:12px;cursor:pointer
-}
-.tabs button:hover{border-color:var(--accent)}
-
-/* VIEWER */
-.viewer{height:calc(100vh - 120px)}
-iframe{width:100%;height:100%;border:none;background:#000}
-
-/* BLOG FEED */
-.feed{padding:12px;display:grid;gap:10px}
-.feed a{
-  background:var(--card);padding:10px;border-radius:12px;
-  text-decoration:none;color:var(--text);
-  border:1px solid #1f2937
-}
-.feed a:hover{border-color:var(--accent)}
-
-footer{font-size:11px;text-align:center;opacity:.6;padding:6px}
-</style>
-</head>
-
-<body>
-
-<header>
-  <button onclick="toggleMenu()">☰</button>
-  <h1>My links</h1>
-  <button onclick="toggleTheme()">🌗</button>
-</header>
-
-<!-- MOBILE MENU -->
-<div class="menu" id="menu" onclick="toggleMenu()">
-  <div class="menu-panel" onclick="event.stopPropagation()">
-    <h3>Navigation</h3>
-    <button onclick="showBlogs()">📰 Blog</button>
-    <button onclick="openContent('https://debeatzgh1.github.io/blogs/')">📄 Blogs</button>
-    <button onclick="openContent('https://debeatzgh1.github.io/debeatzgh/')">🚀 Tools</button>
-    <button onclick="openContent('https://msha.ke/debeatzgh')">🔗 Milkshake</button>
-  </div>
-</div>
-
-<!-- TABS -->
-<div class="tabs">
-  <button onclick="showBlogs()">📰 Blog</button>
-  <button onclick="openContent('https://debeatzgh1.github.io/blogs/')">📄 Blogs</button>
-  <button onclick="openContent('https://debeatzgh1.github.io/debeatzgh/')">🚀 Tools</button>
-  <button onclick="openContent('https://msha.ke/debeatzgh')">🔗 Links</button>
-</div>
-
-<!-- VIEW -->
-<div class="viewer" id="viewerBox">
-  <div class="feed">Select a section to begin</div>
-</div>
-
-<footer>© Debeatzgh • Tech & AI Solutions</footer>
-
-<script>
-const box = document.getElementById('viewerBox');
-
-/* SAFE IFRAME LOADER */
-function openContent(url){
-  box.innerHTML = `<iframe id="viewer" src="${url}"></iframe>`;
-  const iframe = document.getElementById('viewer');
-  iframe.onload = () => {
-    try { iframe.contentDocument; }
-    catch {
-      window.open(url,'_blank');
-      box.innerHTML = `<div class="feed">Opened in new tab (embedding blocked)</div>`;
-    }
-  };
-}
-
-/* BLOG FEED */
-function showBlogs(){
-  box.innerHTML = `<div class="feed" id="feed">Loading latest posts...</div>`;
-  loadFeed('https://debeatzgh.wordpress.com/feed/');
-  loadFeed('http://beatzde4.blogspot.com/feeds/posts/default?alt=rss');
-}
-
-function loadFeed(url){
-  fetch(`https://api.rss2json.com/v1/api.json?rss_url=${url}`)
-    .then(r=>r.json())
-    .then(d=>{
-      const feed=document.getElementById('feed');
-      d.items.slice(0,4).forEach(p=>{
-        feed.innerHTML+=`
-          <a href="${p.link}" target="_blank">
-            <strong>${p.title}</strong><br>
-            <small>${p.pubDate.split(' ')[0]}</small>
-          </a>`;
-      });
-    });
-}
-
-/* MENU */
-function toggleMenu(){
-  document.getElementById('menu').classList.toggle('active');
-}
-
-/* THEME */
-function toggleTheme(){
-  document.body.classList.toggle('light');
-  localStorage.theme=document.body.classList.contains('light')?'light':'dark';
-}
-if(localStorage.theme==='light')document.body.classList.add('light');
-</script>
-
-</body>
-</html>
-
-<div id="booking-fab" style="position: fixed; bottom: 30px; left: 30px; z-index: 1000;">
-    <a href="https://debeatzgh1.github.io/Home-/" target="_blank" style="text-decoration: none;">
-        <div style="background: #28a745; color: white; padding: 15px 25px; border-radius: 50px; display: flex; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: transform 0.3s ease;">
-            <span style="margin-right: 10px; font-size: 1.2rem;">📅</span>
-            <span style="font-weight: bold; font-family: sans-serif;">Book Discovery Call</span>
-        </div>
-    </a>
-</div>
-
-<style>
-    #booking-fab div:hover {
-        transform: scale(1.05);
-        background: #218838;
-    }
-    /* Mobile adjustment */
-    @media (max-width: 600px) {
-        #booking-fab {
-            bottom: 20px;
-            right: 20px;
-        }
-        #booking-fab span:last-child {
-            display: none; /* Shows only the icon on small screens to save space */
-        }
-        #booking-fab div {
-            padding: 15px;
-            border-radius: 50%;
-        }
-    }
-</style><div id="calculator-container" style="font-family: sans-serif; max-width: 400px; border: 1px solid #ddd; padding: 20px; border-radius: 12px; background: #ffo; shadow: 0 4px 6px rgba(0,0,0,0.1);">
-    <h3 style="margin-top: 0; color: #333;">Project Estimator</h3>
-    <p style="font-size: 0.9rem; color: #666;">Select the services you need:</p>
-    
-    <div style="margin-bottom: 15px;">
-        <label style="display: block; margin-bottom: 8px;">
-            <input type="checkbox" class="service-item" data-price="500" onchange="calculateTotal()" /> Landing Page Design (¢850)
-        </label>
-        <label style="display: block; margin-bottom: 8px;">
-            <input type="checkbox" class="service-item" data-price="1200" onchange="calculateTotal()" /> E-commerce Setup (¢1,200)
-        </label>
-        <label style="display: block; margin-bottom: 8px;">
-            <input type="checkbox" class="service-item" data-price="300" onchange="calculateTotal()" /> SEO Optimization (¢300)
-        </label>
-        <label style="display: block; margin-bottom: 8px;">
-            <input type="checkbox" class="service-item" data-price="800" onchange="calculateTotal()" /> Custom web app design (¢900)
-        </label>
-    </div>
-
-    <hr style="border: 0; border-top: 1px solid #eee;" />
-    
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
-        <span style="font-weight: bold; font-size: 1.1rem;">Estimated Total:</span>
-        <span id="total-price" style="font-size: 1.4rem; color: #007bff; font-weight: bold;">¢0</span>
-    </div>
-
-    <button onclick="location.href='mailto: debeatz4@gmail.com?subject=Project Quote'" style="width: 100%; margin-top: 20px; padding: 12px; background: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">
-        Request Formal Quote
-    </button>
-</div>
-
-<script>
-    function calculateTotal() {
-        let total = 0;
-        const checkboxes = document.querySelectorAll('.service-item');
-        checkboxes.forEach(item => {
-            if (item.checked) {
-                total += parseInt(item.getAttribute('data-price'));
+        // Auto-popup logic for new visitors
+        window.addEventListener('load', () => {
+            if(!localStorage.getItem('popup_seen')) {
+                setTimeout(() => {
+                    openGlobalOverlay('https://debeatzgh1.github.io/Blogger-sign-up-button-/');
+                    localStorage.setItem('popup_seen', 'true');
+                }, 5000);
             }
         });
-        document.getElementById('total-price').innerText = '¢' + total.toLocaleString();
-    }
-</script>
-
-
-<!-- Floating Menu Button with Modals: Place in HTML/JavaScript widget on Blogger for site-wide use -->
-<style>
-  :root{
-    --bg-dark: #0b1220;
-    --bg-dark-soft: rgba(15,23,42,0.92);
-    --card-dark: #111827;
-    --border-dark: rgba(255,255,255,0.08);
-    --accent: #38bdf8;
-    --accent-hover: #0ea5e9;
-    --text-light: #e5e7eb;
-    --text-muted: #9ca3af;
-  }
-
-  #floatingMenu {
-    position: fixed;
-    top: 50%;
-    right: 15px;
-    transform: translateY(-50%);
-    z-index: 9999;
-  }
-
-  /* Floating Button */
-  .menu-btn {
-    background: linear-gradient(135deg, #0ea5e9, #2563eb);
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 26px;
-    cursor: pointer;
-    box-shadow: 0 10px 25px rgba(37,99,235,.45);
-    transition: transform .25s ease, box-shadow .25s ease;
-  }
-
-  .menu-btn:hover {
-    transform: scale(1.08);
-    box-shadow: 0 14px 35px rgba(37,99,235,.65);
-  }
-
-  /* Icon Menu */
-  .icon-menu {
-    display: none;
-    flex-direction: column;
-    align-items: flex-end;
-    margin-bottom: 12px;
-  }
-
-  .icon-menu a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: var(--text-light);
-    background: var(--card-dark);
-    padding: 12px 16px;
-    margin: 6px 0;
-    border-radius: 12px;
-    border: 1px solid var(--border-dark);
-    box-shadow: 0 6px 18px rgba(0,0,0,.45);
-    transition: all .25s ease;
-    width: 250px;
-    cursor: pointer;
-  }
-
-  .icon-menu a:hover {
-    background: #020617;
-    border-color: var(--accent);
-    color: #fff;
-    transform: translateX(-6px);
-  }
-
-  .icon-menu i {
-    font-size: 18px;
-    margin-right: 12px;
-    color: var(--accent);
-  }
-
-  /* Modal Overlay */
-  .custom-modal {
-    display: none;
-    position: fixed;
-    z-index: 10000;
-    inset: 0;
-    background: rgba(2,6,23,.85);
-    backdrop-filter: blur(8px);
-    justify-content: center;
-    align-items: center;
-  }
-
-  /* Modal Box */
-  .custom-modal .modal-content {
-    background: var(--bg-dark-soft);
-    margin: 60px auto;
-    padding: 30px 22px;
-    border-radius: 16px;
-    max-width: 640px;
-    box-shadow: 0 30px 80px rgba(0,0,0,.65);
-    position: relative;
-    animation: fadeIn .35s ease;
-    color: var(--text-light);
-    border: 1px solid var(--border-dark);
-  }
-
-  @keyframes fadeIn {
-    from {transform:translateY(25px); opacity:0;}
-    to {transform:translateY(0); opacity:1;}
-  }
-
-  .custom-modal .close {
-    position: absolute;
-    top: 12px;
-    right: 18px;
-    font-size: 26px;
-    color: var(--text-muted);
-    cursor: pointer;
-  }
-
-  .custom-modal .close:hover {
-    color: #fff;
-  }
-
-  .custom-modal h2 {
-    color: var(--accent);
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  .custom-modal p,
-  .custom-modal li,
-  .custom-modal summary {
-    color: var(--text-light);
-  }
-
-  .custom-modal a {
-    color: var(--accent);
-    word-break: break-word;
-  }
-
-  .custom-modal a:hover {
-    text-decoration: underline;
-    color: var(--accent-hover);
-  }
-
-  details {
-    background: rgba(255,255,255,0.03);
-    border-radius: 10px;
-    padding: 10px 14px;
-    margin-bottom: 10px;
-    border: 1px solid var(--border-dark);
-  }
-
-  details summary {
-    cursor: pointer;
-    font-weight: 600;
-  }
-
-  @media (max-width: 700px) {
-    .custom-modal .modal-content { max-width: 96vw; }
-    .icon-menu a { width: 92vw; }
-  }
-</style>
-<!-- Font Awesome (for icons) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-<div id="floatingMenu">
-  <div class="icon-menu" id="iconLinks">
-    <a onclick="openModal('aboutModal')"><i class="fas fa-user"></i> About Us</a>
-    <a onclick="openModal('contactModal')"><i class="fas fa-envelope"></i> Contact</a>
-    <a onclick="openModal('toolsModal')"><i class="fas fa-toolbox"></i> Tools & Widgets</a>
-    <a onclick="openModal('privacyModal')"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
-    <a onclick="openModal('termsModal')"><i class="fas fa-file-contract"></i> Terms of Use</a>
-    <a onclick="openModal('resourcesModal')"><i class="fas fa-book-open"></i> Resources</a>
-    <a onclick="openModal('faqModal')"><i class="fas fa-question-circle"></i> FAQs</a>
-    <a onclick="openModal('aiModal')"><i class="fas fa-robot"></i> AI Articles</a>
-    <a onclick="openModal('galleryModal')"><i class="fas fa-images"></i> Gallery</a>
-  </div>
-  <button class="menu-btn" onclick="toggleMenu()">
-    <i class="fas fa-bars"></i>
-  </button>
-</div>
-<!-- About Modal -->
-<div id="aboutModal" class="custom-modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('aboutModal')">&times;</span>
-    <h2>About Us</h2>
-    <p><strong>debeatzgh1</strong> is a passionate developer, designer, and content creator dedicated to empowering creators and entrepreneurs through open-source tools, digital products, and educational content. Across multiple platforms (GitHub and Blogger), debeatzgh1 shares curated front-end components, productivity resources, and guides for web development, AI, and digital business growth.</p>
-  </div>
-</div>
-<!-- Contact Modal -->
-<div id="contactModal" class="custom-modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('contactModal')">&times;</span>
-    <h2>Contact</h2>
-    <p>You can connect via:</p>
-    <ul>
-      <li><a href="https://github.com/debeatzgh1" target="_blank">GitHub Profile</a></li>
-      <li><a href="https://beatzde4.blogspot.com/p/contact.html" target="_blank">Beatzde4 Blog Contact</a></li>
-      <li>Email: <a href="mailto:your@email.com">Use blog contact form</a></li>
-    </ul>
-  </div>
-</div>
-<!-- Tools & Widgets Modal -->
-<div id="toolsModal" class="custom-modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('toolsModal')">&times;</span>
-    <h2>Tools & Widgets</h2>
-    <ul>
-      <li><a href="https://github.com/debeatzgh1/firebase-front-end-components" target="_blank">Firebase Front-End Components</a>: Reusable UI components, HTML/CSS/JS, and Python resources.</li>
-      <li><a href="https://beatzde4.blogspot.com/p/tools.html" target="_blank">Beatzde4 Blog Tools</a>: Widgets, templates, and utilities for bloggers and creators.</li>
-    </ul>
-  </div>
-</div>
-<!-- Privacy Policy Modal -->
-<div id="privacyModal" class="custom-modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('privacyModal')">&times;</span>
-    <h2>Privacy Policy</h2>
-    <p>Your privacy matters! We use cookies and analytics to enhance your experience. No personal data is shared or sold. For details, visit:</p>
-    <ul>
-      <li><a href="https://beatzde4.blogspot.com/p/privacy-policy.html" target="_blank">Beatzde4 Blog Privacy Policy</a></li>
-      <li><a href="https://appdategh1.blogspot.com/p/privacy-policy.html" target="_blank">AppdateGH Privacy Policy</a></li>
-    </ul>
-  </div>
-</div>
-<!-- Terms of Use Modal -->
-<div id="termsModal" class="custom-modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('termsModal')">&times;</span>
-    <h2>Terms of Use</h2>
-    <p>By using our tools, templates, and content, you agree to use them for lawful and ethical purposes. Please credit the author when using open-source code. See the full terms:</p>
-    <ul>
-      <li><a href="https://beatzde4.blogspot.com/p/terms.html" target="_blank">Beatzde4 Blog Terms</a></li>
-    </ul>
-  </div>
-</div>
-<!-- Resources Modal -->
-<div id="resourcesModal" class="custom-modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('resourcesModal')">&times;</span>
-    <h2>Resources</h2>
-    <ul>
-      <li><a href="https://beatzde4.blogspot.com/p/firebase-curated-front-end-components.html" target="_blank">Firebase Curated Front-End Components</a></li>
-      <li><a href="https://mybrandsonline.blogspot.com/" target="_blank">MyBrandsOnline Blog</a>: Branding advice and online business tips.</li>
-      <li><a href="http://digimartgh.blogspot.com/" target="_blank">DigimartGH</a>: Digital marketing, business tools, and guides.</li>
-    </ul>
-  </div>
-</div>
-<!-- FAQs Modal -->
-<div id="faqModal" class="custom-modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('faqModal')">&times;</span>
-    <h2>Frequently Asked Questions</h2>
-    <details>
-      <summary>Who is debeatzgh1?</summary>
-      <div>
-        <p>debeatzgh1 is a developer, designer, and content creator focused on building modern web apps, sharing productivity tools, and providing digital solutions. Find my projects on <a href="https://github.com/debeatzgh1" target="_blank">GitHub</a> and insights on my <a href="https://beatzde4.blogspot.com/" target="_blank">blog</a>.</p>
-      </div>
-    </details>
-    <details>
-      <summary>What is the firebase-front repository?</summary>
-      <div>
-        <p>The <a href="https://github.com/debeatzgh1/firebase-front-end-components" target="_blank">firebase-front-end-components</a> repository is an open-source front-end template or starter kit for integrating Firebase services into web projects. It provides modern UI components and ready-to-use code for developers.</p>
-      </div>
-    </details>
-    <details>
-      <summary>How can I use your templates or code?</summary>
-      <div>
-        <p>Browse my <a href="https://github.com/debeatzgh1?tab=repositories" target="_blank">GitHub repositories</a> and follow the README instructions to clone or download templates and starter projects. Most projects are open source and free to use with attribution.</p>
-      </div>
-    </details>
-    <details>
-      <summary>Do you provide guides and tutorials?</summary>
-      <div>
-        <p>Yes! I share detailed guides, tech tips, and tutorials on my <a href="https://beatzde4.blogspot.com/" target="_blank">blog</a> covering Firebase, web development, productivity tools, and AI-powered solutions.</p>
-      </div>
-    </details>
-    <details>
-      <summary>How do I contact you for custom services?</summary>
-      <div>
-        <p>You can reach out via my blog's contact form, or through my email and social links provided on my <a href="https://github.com/debeatzgh1" target="_blank">GitHub profile</a>.</p>
-      </div>
-    </details>
-    <details>
-      <summary>Can I request a new feature or report a bug?</summary>
-      <div>
-        <p>Absolutely! Please open an issue on the relevant GitHub repository, or leave a comment on my blog post related to your request.</p>
-      </div>
-    </details>
-    <details>
-      <summary>Are your projects free to use?</summary>
-      <div>
-        <p>Most projects are open source and free for personal or educational use. Please check the license in each repository for details.</p>
-      </div>
-    </details>
-    <details>
-      <summary>What topics do you cover on your blog?</summary>
-      <div>
-        <p>I cover digital design, productivity tools, web development (especially Firebase), AI, and online business tips.</p>
-      </div>
-    </details>
-    <details>
-      <summary>Where can I follow your updates?</summary>
-      <div>
-        <p>Follow me on <a href="https://github.com/debeatzgh1" target="_blank">GitHub</a> for code/project updates and on <a href="https://beatzde4.blogspot.com/" target="_blank">Blogger</a> for articles and announcements.</p>
-      </div>
-    </details>
-  </div>
-</div>
-<!-- AI Articles Modal -->
-<div id="aiModal" class="custom-modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('aiModal')">&times;</span>
-    <h2>AI Articles</h2>
-    <ul>
-      <li><a href="https://beatzde4.blogspot.com/search/label/AI" target="_blank">AI Articles on Beatzde4</a></li>
-      <li><a href="https://appdategh1.blogspot.com/search/label/AI" target="_blank">AppdateGH AI Section</a></li>
-    </ul>
-    <p>Stay updated with the latest in AI, automation, and tech trends!</p>
-  </div>
-</div>
-<!-- Gallery Modal -->
-<div id="galleryModal" class="custom-modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('galleryModal')">&times;</span>
-    <h2>Gallery</h2>
-    <p>View creative inspiration, UI/UX samples, and project showcases:</p>
-    <ul>
-      <li><a href="https://pin.it/7iRoE2LKj" target="_blank">Pinterest Gallery</a></li>
-    </ul>
-  </div>
-</div>
-<script>
-  function toggleMenu() {
-    const menu = document.getElementById('iconLinks');
-    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-  }
-  function openModal(id) {
-    document.getElementById(id).style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  }
-  function closeModal(id) {
-    document.getElementById(id).style.display = 'none';
-    document.body.style.overflow = '';
-  }
-  window.onclick = function(event) {
-    const modals = document.querySelectorAll('.custom-modal');
-    modals.forEach(function(modal) {
-      if (event.target === modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = '';
-      }
-    });
-  }
-  document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-      document.querySelectorAll('.custom-modal').forEach(function(modal){
-        modal.style.display = 'none';
-      });
-      document.body.style.overflow = '';
-    }
-  });
-</script>
-
+    </script>
+</body>
+</html>
