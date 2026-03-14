@@ -33,7 +33,7 @@
         #gdev-launcher:hover { transform: translateY(-50%) scale(1.08) translateX(5px); border-color: var(--g-blue); }
 
         .dev-avatar {
-            width: 42px; height: 42px; background: #121212; border-radius: 50%;
+            width: 30px; height: 30px; background: #121212; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             border: 2px solid var(--g-blue); color: var(--g-blue); position: relative;
         }
