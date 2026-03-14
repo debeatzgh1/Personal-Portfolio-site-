@@ -141,7 +141,7 @@
     <script>
         const overlay = document.getElementById('gdev-overlay');
         const frame = document.getElementById('gdev-frame');
-        const profileUrl = "https://tally.so/r/3jkE29";
+        const profileUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdipVP7tU1hjTjECfWUdnhzWN-PROdQp19ng25EUDJk5-8JzA/viewform?usp=header";
 
         function toggleGDev() {
             if (overlay.style.display === 'flex') {
