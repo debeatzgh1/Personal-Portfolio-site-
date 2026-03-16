@@ -495,3 +495,7 @@ This site uses local storage to optimize performance and track session status fo
 
 
 <iframe src="https://beatzde4.blogspot.com/p/home.html" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
+
+
+
+<script src="https://gist.github.com/debeatzgh1/98cf571e21881f4a39560503988861d3.js"></script>
