@@ -1,3 +1,176 @@
+<!doctype html>
+
+
+    
+    Dynamic Launcher with Auth Control
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --accent-blue: #3b82f6;
+            --accent-red: #e11d48;
+            --accent-green: #10b981;
+        }
+
+        body { margin: 0; background: #0f172a; font-family: 'Segoe UI', sans-serif; }
+
+        /* Floating Launcher - Left Middle */
+        #floating-launcher {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10001;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 15px 10px;
+            border-radius: 0 20px 20px 0;
+            border: 1px solid var(--glass-border);
+            border-left: none;
+            box-shadow: 5px 0 20px rgba(0,0,0,0.4);
+        }
+
+        .nav-icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: white;
+            font-size: 1.3rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            background: var(--glass-bg);
+        }
+
+        .nav-icon:hover {
+            background: var(--accent-blue);
+            transform: translateX(5px);
+        }
+
+        .pulse { animation: heartbeat 1.5s infinite; }
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Overlay Styling */
+        #overlay-container {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 10002;
+            background: #000;
+        }
+
+        .overlay-header {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10003;
+            display: flex;
+            gap: 10px;
+            width: 90%;
+            justify-content: center;
+        }
+
+        .btn-ctrl {
+            padding: 10px 18px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            color: white;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .btn-ctrl:hover { background: var(--accent-blue); }
+        .btn-close:hover { background: var(--accent-red); }
+        .btn-auth { background: rgba(59, 130, 246, 0.2); border-color: var(--accent-blue); }
+        .btn-auth.disabled { background: var(--accent-green); cursor: default; }
+
+        iframe { width: 100%; height: 100%; border: none; }
+    </style>
+
+
+
+    <div id="floating-launcher">
+        <div class="nav-icon pulse" onclick="toggleOverlay()" title="Open Hub">❯</div>
+        <div class="nav-icon" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</div>
+        <div class="nav-icon" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})">↓</div>
+    </div>
+
+    <div id="overlay-container">
+        <div class="overlay-header">
+            <button class="btn-ctrl btn-close" onclick="toggleOverlay()">Close [X]</button>
+            <button id="auth-btn" class="btn-ctrl btn-auth" onclick="handleAuth()">Sign in to Disable Loop</button>
+            <button class="btn-ctrl" onclick="toggleFullScreen()">Full Screen ⛶</button>
+        </div>
+        <iframe id="main-frame" src="https://msha.ke/debeatzgh/"></iframe>
+    </div>
+
+<script>
+    const overlay = document.getElementById('overlay-container');
+    const authBtn = document.getElementById('auth-btn');
+    let autoPopupInterval;
+
+    function toggleOverlay() {
+        overlay.style.display = (overlay.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function toggleFullScreen() {
+        if (!document.fullscreenElement) {
+            overlay.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    }
+
+    function runAutoPopup() {
+        // Skip if user came from the target URL
+        if (document.referrer.includes("debeatzgh1.github.io/firebase-front-end-components")) {
+            console.log("Referrer match - Auto-popup suppressed.");
+            return;
+        }
+
+        if (overlay.style.display !== 'block') {
+            toggleOverlay();
+        }
+    }
+
+    function handleAuth() {
+        // Stop the loop
+        clearInterval(autoPopupInterval);
+        
+        // Update Button Style
+        authBtn.innerText = "Deactivated ✓";
+        authBtn.classList.add('disabled');
+        authBtn.onclick = null; // Disable further clicks
+        
+        console.log("User 'Authenticated' - Loop stopped.");
+    }
+
+    // Start the 5-second loop
+    autoPopupInterval = setInterval(runAutoPopup, 6000);
+
+    // Initial trigger
+    window.onload = () => setTimeout(runAutoPopup, 1000);
+</script>
+
+
+</!doctype>
+
+
 <iframe src="https://debeatzgh1.github.io/dk" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
 
 
