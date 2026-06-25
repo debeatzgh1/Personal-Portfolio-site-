@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>My • Premium FAQ Links Hub</title>
+<title> • Premium FAQ Links Hub</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -55,7 +55,7 @@ body::after{
 }
 
 .hero-banner{
-  max-width:100px;
+  max-width:1200px;
   margin:auto;
   padding:35px 25px;
   border-radius:30px;
@@ -93,7 +93,7 @@ body::after{
 }
 
 .top-buttons{
-  margin-top:20px;
+  margin-top:28px;
   display:flex;
   flex-wrap:wrap;
   gap:15px;
@@ -124,13 +124,13 @@ body::after{
 
 /* SEARCH */
 .search-box{
-  max-width:900px;
+  max-width:1000px;
   margin:20px auto 10px;
   padding:0 20px;
 }
 
 .search-box input{
-  width:90%;
+  width:100%;
   padding:18px 20px;
   border:none;
   outline:none;
@@ -301,10 +301,10 @@ body::after{
   text-decoration:none;
   color:#fff;
   background:#15263f;
-  padding:10px 12px;
+  padding:10px 16px;
   border-radius:12px;
   cursor:pointer;
-  font-weight:400;
+  font-weight:600;
 }
 
 .viewer iframe{
@@ -319,8 +319,8 @@ body::after{
   position:fixed;
   right:18px;
   bottom:20px;
-  width:40px;
-  height:40px;
+  width:64px;
+  height:64px;
   border-radius:50%;
   display:flex;
   align-items:center;
@@ -375,7 +375,7 @@ body::after{
       ✨ Premium Personal Showcase Hub
     </div>
 
-    <h1>UI & UX</h1>
+    <h1>Kumah David</h1>
 
     <p>
       Explore premium portfolio interfaces, modern content platforms,
@@ -753,7 +753,7 @@ body::after{
 
 <!-- FOOTER -->
 <footer class="footer">
-  Designed for <strong>creators</strong> • Premium FAQ Showcase UI
+  Designed for <strong>All</strong> • Premium FAQ Showcase UI
 </footer>
 
 <script>
