@@ -55,7 +55,7 @@ body::after{
 }
 
 .hero-banner{
-  max-width:1200px;
+  max-width:100px;
   margin:auto;
   padding:35px 25px;
   border-radius:30px;
@@ -93,7 +93,7 @@ body::after{
 }
 
 .top-buttons{
-  margin-top:28px;
+  margin-top:20px;
   display:flex;
   flex-wrap:wrap;
   gap:15px;
@@ -124,13 +124,13 @@ body::after{
 
 /* SEARCH */
 .search-box{
-  max-width:1000px;
+  max-width:900px;
   margin:20px auto 10px;
   padding:0 20px;
 }
 
 .search-box input{
-  width:100%;
+  width:90%;
   padding:18px 20px;
   border:none;
   outline:none;
@@ -301,10 +301,10 @@ body::after{
   text-decoration:none;
   color:#fff;
   background:#15263f;
-  padding:10px 16px;
+  padding:10px 12px;
   border-radius:12px;
   cursor:pointer;
-  font-weight:600;
+  font-weight:400;
 }
 
 .viewer iframe{
@@ -319,8 +319,8 @@ body::after{
   position:fixed;
   right:18px;
   bottom:20px;
-  width:64px;
-  height:64px;
+  width:40px;
+  height:40px;
   border-radius:50%;
   display:flex;
   align-items:center;
@@ -375,7 +375,7 @@ body::after{
       ✨ Premium Personal Showcase Hub
     </div>
 
-    <h1>Kumah David</h1>
+    <h1>UI & UX</h1>
 
     <p>
       Explore premium portfolio interfaces, modern content platforms,
@@ -753,7 +753,7 @@ body::after{
 
 <!-- FOOTER -->
 <footer class="footer">
-  Designed for <strong>Kumah David</strong> • Premium FAQ Showcase UI
+  Designed for <strong>creators</strong> • Premium FAQ Showcase UI
 </footer>
 
 <script>
