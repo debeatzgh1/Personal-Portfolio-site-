@@ -1,674 +1,808 @@
-<!doctype html>
-
-
-    
-    Dynamic Launcher with Auth Control
-    <style>
-        :root {
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --accent-blue: #3b82f6;
-            --accent-red: #e11d48;
-            --accent-green: #10b981;
-        }
-
-        body { margin: 0; background: #0f172a; font-family: 'Segoe UI', sans-serif; }
-
-        /* Floating Launcher - Left Middle */
-        #floating-launcher {
-            position: fixed;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 10001;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(12px);
-            padding: 15px 10px;
-            border-radius: 0 20px 20px 0;
-            border: 1px solid var(--glass-border);
-            border-left: none;
-            box-shadow: 5px 0 20px rgba(0,0,0,0.4);
-        }
-
-        .nav-icon {
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: white;
-            font-size: 1.3rem;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            background: var(--glass-bg);
-        }
-
-        .nav-icon:hover {
-            background: var(--accent-blue);
-            transform: translateX(5px);
-        }
-
-        .pulse { animation: heartbeat 1.5s infinite; }
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        /* Overlay Styling */
-        #overlay-container {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 10002;
-            background: #000;
-        }
-
-        .overlay-header {
-            position: absolute;
-            top: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10003;
-            display: flex;
-            gap: 10px;
-            width: 90%;
-            justify-content: center;
-        }
-
-        .btn-ctrl {
-            padding: 10px 18px;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            color: white;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-
-        .btn-ctrl:hover { background: var(--accent-blue); }
-        .btn-close:hover { background: var(--accent-red); }
-        .btn-auth { background: rgba(59, 130, 246, 0.2); border-color: var(--accent-blue); }
-        .btn-auth.disabled { background: var(--accent-green); cursor: default; }
-
-        iframe { width: 100%; height: 100%; border: none; }
-    </style>
-
-
-
-    <div id="floating-launcher">
-        <div class="nav-icon pulse" onclick="toggleOverlay()" title="Open Hub">❯</div>
-        <div class="nav-icon" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</div>
-        <div class="nav-icon" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})">↓</div>
-    </div>
-
-    <div id="overlay-container">
-        <div class="overlay-header">
-            <button class="btn-ctrl btn-close" onclick="toggleOverlay()">Close [X]</button>
-            <button id="auth-btn" class="btn-ctrl btn-auth" onclick="handleAuth()">Sign in to Disable Loop</button>
-            <button class="btn-ctrl" onclick="toggleFullScreen()">Full Screen ⛶</button>
-        </div>
-        <iframe id="main-frame" src="https://msha.ke/debeatzgh/"></iframe>
-    </div>
-
-<script>
-    const overlay = document.getElementById('overlay-container');
-    const authBtn = document.getElementById('auth-btn');
-    let autoPopupInterval;
-
-    function toggleOverlay() {
-        overlay.style.display = (overlay.style.display === 'block') ? 'none' : 'block';
-    }
-
-    function toggleFullScreen() {
-        if (!document.fullscreenElement) {
-            overlay.requestFullscreen();
-        } else {
-            document.exitFullscreen();
-        }
-    }
-
-    function runAutoPopup() {
-        // Skip if user came from the target URL
-        if (document.referrer.includes("debeatzgh1.github.io/firebase-front-end-components")) {
-            console.log("Referrer match - Auto-popup suppressed.");
-            return;
-        }
-
-        if (overlay.style.display !== 'block') {
-            toggleOverlay();
-        }
-    }
-
-    function handleAuth() {
-        // Stop the loop
-        clearInterval(autoPopupInterval);
-        
-        // Update Button Style
-        authBtn.innerText = "Deactivated ✓";
-        authBtn.classList.add('disabled');
-        authBtn.onclick = null; // Disable further clicks
-        
-        console.log("User 'Authenticated' - Loop stopped.");
-    }
-
-    // Start the 5-second loop
-    autoPopupInterval = setInterval(runAutoPopup, 6000);
-
-    // Initial trigger
-    window.onload = () => setTimeout(runAutoPopup, 1000);
-</script>
-
-
-</!doctype>
-
-
-<iframe src="https://debeatzgh1.github.io/dk" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
-
-
-
 
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>G-Dev Portfolio | Hiring Portal</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap');
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-        :root {
-            --g-blue: #8ab4f8;
-            --g-green: #34A853;
-            --dark-bg: #1a1c1e;
-            --dark-card: #2d2f31;
-            --glass-border: rgba(255, 255, 255, 0.08);
-        }
+<title>My • Premium FAQ Links Hub</title>
 
-        body { font-family: 'Google Sans', sans-serif; background: #121212; margin: 0; }
-
-        /* 1. LAUNCHER */
-        #gdev-launcher {
-            position: fixed; left: 20px; top: 50%; transform: translateY(-50%);
-            display: flex; align-items: center; gap: 12px;
-            background: var(--dark-card); padding: 8px 18px 8px 8px;
-            border-radius: 40px; cursor: pointer; z-index: 9999;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid var(--glass-border);
-        }
-
-        #gdev-launcher:hover { transform: translateY(-50%) scale(1.08) translateX(5px); border-color: var(--g-blue); }
-
-        .dev-avatar {
-            width: 30px; height: 30px; background: #121212; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            border: 2px solid var(--g-blue); color: var(--g-blue); position: relative;
-        }
-
-        .status-dot {
-            position: absolute; bottom: 2px; right: 2px; width: 10px; height: 10px;
-            background: var(--g-green); border-radius: 50%; border: 2px solid var(--dark-card);
-        }
-
-        .status-glow {
-            position: absolute; inset: 0; background: var(--g-green);
-            border-radius: 50%; animation: status-pulse 2s infinite;
-        }
-
-        @keyframes status-pulse { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(2.5); opacity: 0; } }
-
-        /* 2. OVERLAY MODAL */
-        #gdev-overlay {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.85);
-            backdrop-filter: blur(12px); display: none; z-index: 10000;
-            justify-content: center; align-items: center; padding: 20px;
-            opacity: 0; transition: opacity 0.4s ease;
-        }
-
-        #gdev-overlay.active { display: flex; opacity: 1; }
-
-        .gdev-modal {
-            width: 100%; max-width: 950px; height: 92vh;
-            background: var(--dark-bg); border-radius: 28px;
-            display: flex; flex-direction: column; overflow: hidden;
-            border: 1px solid var(--glass-border); position: relative;
-        }
-
-        /* 3. IFRAME & FOOTER */
-        #gdev-frame { flex-grow: 1; width: 100%; border: none; background: #fff; }
-
-        .close-gdev {
-            position: absolute; top: 20px; right: 25px; width: 40px; height: 30px;
-            background: var(--dark-card); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; color: #fff; z-index: 20;
-        }
-
-        /* CONTACT ME BUTTON STYLE */
-        .hire-btn {
-            background: var(--g-green);
-            color: white;
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(52, 168, 83, 0.3);
-        }
-        .hire-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(52, 168, 83, 0.4); background: #2e964a; }
-
-        @media (max-width: 768px) {
-            .gdev-modal { height: 100vh; border-radius: 0; }
-            .footer-controls { flex-direction: column; gap: 10px; padding: 15px; }
-        }
-    </style>
-</head>
-<body>
-
-    <div id="gdev-launcher" onclick="toggleGDev()">
-        <div class="dev-avatar">
-            <i class="fab fa-google"></i>
-            <div class="status-dot"><div class="status-glow"></div></div>
-        </div>
-        <div class="hidden sm:block">
-            <div class="flex items-center gap-2">
-                <span class="text-[9px] text-[#34A853] font-bold uppercase tracking-widest">Active</span>
-            </div>
-            <p class="text-[14px] font-medium text-gray-200">@debeatzgh</p>
-        </div>
-    </div>
-
-    <div id="gdev-overlay">
-        <div class="gdev-modal">
-            <div class="close-gdev" onclick="toggleGDev()"><i class="fas fa-times"></i></div>
-            
-            <iframe id="gdev-frame" src=""></iframe>
-
-            <div class="footer-controls p-4 bg-[#1a1c1e] border-t border-white/5 flex justify-between items-center px-8">
-                <span class="text-[9px] text-gray-600 font-bold uppercase tracking-[2px]">G-Dev Protocol v4.0</span>
-                
-                <div class="flex items-center gap-3">
-                    <button id="copy-btn" class="text-[11px] text-[#8ab4f8] font-bold px-4 py-2 hover:text-white transition" onclick="copyProfileLink()">
-                        Copy Profile
-                    </button>
-                    <a href="https://wa.me/233549757544?text=Hi%20DeBeatz,%20I%20saw%20your%20Google%20Dev%20profile%20and%20would%20like%20to%20discuss%20a%20project." 
-                       target="_blank" class="hire-btn">
-                        <i class="fas fa-briefcase"></i> Contact Me
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const overlay = document.getElementById('gdev-overlay');
-        const frame = document.getElementById('gdev-frame');
-        const profileUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdipVP7tU1hjTjECfWUdnhzWN-PROdQp19ng25EUDJk5-8JzA/viewform?usp=header";
-
-        function toggleGDev() {
-            if (overlay.style.display === 'flex') {
-                overlay.classList.remove('active');
-                setTimeout(() => { overlay.style.display = 'none'; frame.src = ""; }, 400);
-                document.body.style.overflow = 'auto';
-            } else {
-                overlay.style.display = 'flex';
-                setTimeout(() => overlay.classList.add('active'), 10);
-                frame.src = profileUrl;
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        async function copyProfileLink() {
-            await navigator.clipboard.writeText(profileUrl);
-            const btn = document.getElementById('copy-btn');
-            btn.innerText = "Copied!";
-            setTimeout(() => { btn.innerText = "Copy Profile"; }, 2000);
-        }
-
-        overlay.onclick = (e) => { if (e.target === overlay) toggleGDev(); };
-    </script>
-</body>
-</html>
-
- 
- 
- 
- 
- <nav id="slim-nav" class="slim-nav-container">
-    <div class="nav-left">
-        <button class="theme-toggle" onclick="toggleTheme()" title="Switch Theme">
-            <i id="theme-icon" class="fas fa-moon"></i>
-        </button>
-        <div class="nav-divider"></div>
-        <span class="nav-inscription" onclick="openForm()">
-            Browse modern UI layout and pages <i class="fas fa-external-link-alt ml-1 opacity-40"></i>
-        </span>
-    </div>
-
-    <div class="nav-right">
-        <button onclick="scrollToTop()" class="nav-ctrl" title="Scroll to Top">
-            <i class="fas fa-chevron-up"></i>
-        </button>
-        <button onclick="scrollToBottom()" class="nav-ctrl" title="Scroll to Bottom">
-            <i class="fas fa-chevron-down"></i>
-        </button>
-    </div>
-</nav>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-    /* 1. THEME & TRANSITION LOGIC */
-    :root {
-        --nav-bg: rgba(10, 10, 12, 0.85);
-        --nav-text: #f0f6fc;
-        --nav-accent: #00f2ff;
-        --nav-border: rgba(0, 242, 255, 0.15);
-        --page-bg: #030712;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    body[data-theme="light"] {
-        --nav-bg: rgba(255, 255, 255, 0.9);
-        --nav-text: #0f172a;
-        --nav-accent: #2563eb;
-        --nav-border: rgba(0, 0, 0, 0.08);
-        --page-bg: #f8fafc;
-    }
+html{
+  scroll-behavior:smooth;
+}
 
-    body {
-        background-color: var(--page-bg);
-        transition: background-color 0.4s ease, color 0.4s ease;
-    }
+body{
+  font-family:'Poppins',sans-serif;
+  background:#06111f;
+  color:#fff;
+  overflow-x:hidden;
+}
 
-    /* 2. STICKY-HIDE ANIMATION */
-    .slim-nav-container {
-        position: fixed;
-        top: 15px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 92%;
-        max-width: 750px;
-        height: 44px;
-        background: var(--nav-bg);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border: 1px solid var(--nav-border);
-        border-radius: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 12px;
-        z-index: 10000;
-        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                    top 0.4s ease, 
-                    background 0.3s ease;
-    }
+/* BACKGROUND */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at top left,#00d4ff22,transparent 30%),
+    radial-gradient(circle at bottom right,#7c4dff22,transparent 30%),
+    linear-gradient(135deg,#06111f,#0c1d33,#07111d);
+  z-index:-2;
+}
 
-    /* The 'Hidden' State */
-    .nav-up {
-        transform: translateX(-50%) translateY(-100px);
-    }
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  backdrop-filter:blur(1px);
+  z-index:-1;
+}
 
-    /* 3. COMPONENT STYLING */
-    .nav-left, .nav-right { display: flex; align-items: center; gap: 8px; }
+/* HEADER */
+.hero{
+  padding:40px 20px 30px;
+  text-align:center;
+  position:relative;
+}
 
-    .nav-inscription {
-        font-size: 11px;
-        font-weight: 800;
-        letter-spacing: 0.3px;
-        color: var(--nav-text);
-        cursor: pointer;
-        transition: 0.2s;
-        text-transform: uppercase;
-    }
+.hero-banner{
+  max-width:1200px;
+  margin:auto;
+  padding:35px 25px;
+  border-radius:30px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.1);
+  backdrop-filter:blur(20px);
+  box-shadow:0 10px 40px rgba(0,0,0,0.4);
+}
 
-    .nav-inscription:hover { color: var(--nav-accent); }
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 18px;
+  border-radius:50px;
+  background:#00d4ff20;
+  border:1px solid #00d4ff55;
+  color:#8fe8ff;
+  font-size:13px;
+  margin-bottom:18px;
+}
 
-    .nav-divider { width: 1px; height: 16px; background: var(--nav-border); margin: 0 4px; }
+.hero h1{
+  font-size:clamp(2rem,5vw,4rem);
+  margin-bottom:12px;
+  font-weight:700;
+}
 
-    .theme-toggle, .nav-ctrl {
-        width: 32px; height: 32px;
-        border-radius: 10px;
-        display: flex; align-items: center; justify-content: center;
-        cursor: pointer; color: var(--nav-text);
-        transition: 0.2s; border: none; background: transparent;
-    }
+.hero p{
+  max-width:760px;
+  margin:auto;
+  line-height:1.8;
+  color:#d7e4ff;
+  font-size:15px;
+}
 
-    .theme-toggle:hover, .nav-ctrl:hover {
-        background: rgba(255, 255, 255, 0.08);
-        color: var(--nav-accent);
-    }
+.top-buttons{
+  margin-top:28px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:15px;
+  justify-content:center;
+}
 
-    body[data-theme="light"] .theme-toggle:hover,
-    body[data-theme="light"] .nav-ctrl:hover {
-        background: rgba(0, 0, 0, 0.05);
-    }
+.top-buttons a{
+  text-decoration:none;
+  color:#fff;
+  padding:14px 24px;
+  border-radius:16px;
+  font-weight:600;
+  transition:.3s ease;
+}
 
-    @media (max-width: 480px) {
-        .nav-inscription { font-size: 9px; max-width: 180px; }
-        .slim-nav-container { width: 96%; }
-    }
+.btn-primary{
+  background:linear-gradient(135deg,#00bfff,#6a5cff);
+}
+
+.btn-secondary{
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.1);
+}
+
+.top-buttons a:hover{
+  transform:translateY(-3px) scale(1.02);
+}
+
+/* SEARCH */
+.search-box{
+  max-width:1000px;
+  margin:20px auto 10px;
+  padding:0 20px;
+}
+
+.search-box input{
+  width:100%;
+  padding:18px 20px;
+  border:none;
+  outline:none;
+  border-radius:20px;
+  background:rgba(255,255,255,0.08);
+  color:#fff;
+  font-size:15px;
+  backdrop-filter:blur(10px);
+}
+
+.search-box input::placeholder{
+  color:#c7d3ea;
+}
+
+/* CATEGORY */
+.section{
+  max-width:1300px;
+  margin:50px auto;
+  padding:0 20px;
+}
+
+.section-title{
+  font-size:28px;
+  margin-bottom:10px;
+  font-weight:700;
+}
+
+.section-desc{
+  color:#b6c5df;
+  margin-bottom:28px;
+  line-height:1.7;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:25px;
+}
+
+/* CARD */
+.card{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:28px;
+  overflow:hidden;
+  transition:.4s ease;
+  position:relative;
+  backdrop-filter:blur(16px);
+}
+
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 40px rgba(0,0,0,0.35);
+}
+
+.preview{
+  height:220px;
+  position:relative;
+  overflow:hidden;
+  background:#0b1728;
+}
+
+.preview iframe{
+  width:100%;
+  height:100%;
+  border:none;
+  transform:scale(.85);
+  transform-origin:top left;
+  width:117%;
+  height:117%;
+  pointer-events:none;
+}
+
+.card-content{
+  padding:22px;
+}
+
+.category-tag{
+  display:inline-block;
+  padding:8px 14px;
+  border-radius:50px;
+  font-size:12px;
+  background:#ffffff12;
+  margin-bottom:15px;
+  color:#9fd7ff;
+}
+
+.card h3{
+  font-size:22px;
+  margin-bottom:12px;
+}
+
+.card p{
+  color:#d3ddf2;
+  line-height:1.7;
+  font-size:14px;
+  margin-bottom:22px;
+}
+
+.card-buttons{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.card-buttons a{
+  flex:1;
+  min-width:130px;
+  text-align:center;
+  text-decoration:none;
+  padding:14px 15px;
+  border-radius:14px;
+  font-weight:600;
+  transition:.3s ease;
+}
+
+.open-inside{
+  background:linear-gradient(135deg,#00c6ff,#7d4dff);
+  color:#fff;
+}
+
+.open-outside{
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.1);
+  color:#fff;
+}
+
+.card-buttons a:hover{
+  transform:translateY(-2px);
+}
+
+/* IFRAME MODAL */
+.viewer{
+  position:fixed;
+  inset:0;
+  background:#000d;
+  z-index:9999;
+  display:none;
+  flex-direction:column;
+}
+
+.viewer.active{
+  display:flex;
+}
+
+.viewer-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 18px;
+  background:#07111d;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.viewer-top h2{
+  font-size:16px;
+}
+
+.viewer-actions{
+  display:flex;
+  gap:12px;
+}
+
+.viewer-actions button,
+.viewer-actions a{
+  border:none;
+  text-decoration:none;
+  color:#fff;
+  background:#15263f;
+  padding:10px 16px;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.viewer iframe{
+  flex:1;
+  width:100%;
+  border:none;
+  background:#fff;
+}
+
+/* FLOATING WHATSAPP */
+.whatsapp{
+  position:fixed;
+  right:18px;
+  bottom:20px;
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  font-size:28px;
+  background:#25D366;
+  color:#fff;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+  z-index:999;
+  animation:pulse 3s infinite;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.08);}
+  100%{transform:scale(1);}
+}
+
+/* FOOTER */
+.footer{
+  text-align:center;
+  padding:50px 20px;
+  color:#aeb9cf;
+}
+
+.footer strong{
+  color:#fff;
+}
+
+@media(max-width:768px){
+
+  .card-buttons{
+    flex-direction:column;
+  }
+
+  .top-buttons{
+    flex-direction:column;
+  }
+
+}
 </style>
-
-<script>
-    // --- 1. STICKY HIDE LOGIC ---
-    let lastScrollY = window.scrollY;
-    const nav = document.getElementById('slim-nav');
-
-    window.addEventListener('scroll', () => {
-        const currentScrollY = window.scrollY;
-
-        if (currentScrollY > lastScrollY && currentScrollY > 100) {
-            // Scrolling Down - Hide Nav
-            nav.classList.add('nav-up');
-        } else {
-            // Scrolling Up - Show Nav
-            nav.classList.remove('nav-up');
-        }
-        lastScrollY = currentScrollY;
-    });
-
-    // --- 2. EXTERNAL REDIRECT ---
-    function openForm() {
-        window.open('https://debeatzgh1.github.io/Floating-Flashcards-Widget/', '_blank');
-    }
-
-    // --- 3. THEME ENGINE ---
-    function toggleTheme() {
-        const body = document.body;
-        const icon = document.getElementById('theme-icon');
-        const isLight = body.getAttribute('data-theme') === 'light';
-        
-        if (isLight) {
-            body.removeAttribute('data-theme');
-            icon.className = 'fas fa-moon';
-            localStorage.setItem('debeatz_theme', 'dark');
-        } else {
-            body.setAttribute('data-theme', 'light');
-            icon.className = 'fas fa-sun';
-            localStorage.setItem('debeatz_theme', 'light');
-        }
-    }
-
-    // --- 4. NAVIGATION ---
-    function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-    function scrollToBottom() { window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); }
-
-    // Init Theme on Load
-    if (localStorage.getItem('debeatz_theme') === 'light') toggleTheme();
-</script>
-
-
-
-# 💎 Digital Ecosystem
-**Professional Software Development & AI Content Strategy Hub**
-
-This repository serves as the central command center for the eg **DeBeatzGH** brand. It features a high-end, responsive UI built with Tailwind CSS and a custom JavaScript-driven overlay system.
-
-## 🚀 Key Features
-- **Master Overlay Engine:** Opens external tools (WordPress Signup, Firebase Distribution, Sales Shop) in a professional, branded iframe without leaving the site.
-- **Glassmorphic Bento Grid:** A modern layout showcasing services like Custom Dev, AI Automation, and Passive Income Blueprints.
-- **Smart Dock:** A persistent floating navigation bar for mobile-first user engagement.
-- **Session Intelligence:** Uses `localStorage` to ensure popups are non-intrusive and respect the user's journey.
-
-## 🛠️ Tech Stack
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **Icons:** [FontAwesome](https://fontawesome.com/)
-- **Typography:** Plus Jakarta Sans & JetBrains Mono
-- **Deployment:** GitHub Pages
-
-## 📂 Architecture
-- `index.html`: Main landing page and UI logic.
-- `Blogger-sign-up-button/`: Repository for WordPress subdomain claims.
-- `Side-hustle-starter-kit/`: Educational resource distribution.
-
-## ⚖️ Legal & Privacy
-This site uses local storage to optimize performance and track session status for authentication popups. No personal data is stored outside the user's browser.
-
----
-© 2026  Engineered for Performance.
-
-
-
-
-
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeBeatzGH | Software Developer & AI Strategist</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=JetBrains+Mono&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #030712; color: #f0f6fc; overflow-x: hidden; }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .text-gradient { background: linear-gradient(to right, #22d3ee, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        /* Master Overlay Styles */
-        #master-overlay {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(15px); z-index: 50000; display: none; flex-direction: column;
-        }
-        .loader-bar { height: 2px; width: 0%; background: #00f2ff; position: absolute; top: 0; transition: width 0.5s; }
-    </style>
 </head>
+
 <body>
 
-    <div class="fixed inset-0 -z-10">
-        <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(6,182,212,0.1),transparent_50%)]"></div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-banner">
+
+    <div class="badge">
+      ✨ Premium Personal Showcase Hub
     </div>
 
-    <nav class="flex justify-between items-center px-8 py-6 max-w-7xl mx-auto">
-        <div class="text-xl font-black tracking-tighter uppercase">DeBeatz<span class="text-cyan-400">GH</span></div>
-        <div class="hidden md:flex space-x-8 text-[10px] font-bold uppercase tracking-widest text-slate-500">
-            <a href="https://beatzde4.blogspot.com" class="hover:text-cyan-400 transition">Blog</a>
-            <a href="https://debeatzgh1.github.io/sales" class="hover:text-cyan-400 transition">Shop</a>
-            <a href="#services" class="hover:text-cyan-400 transition">Services</a>
-        </div>
-        <button onclick="openGlobalOverlay('https://debeatzgh1.github.io/Blogger-sign-up-button-/')" class="glass px-6 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest border-cyan-500/30 hover:bg-cyan-500/10 transition">Sign Up</button>
-    </nav>
+    <h1>Kumah David</h1>
 
-    <header class="max-w-4xl mx-auto text-center pt-20 pb-20 px-6">
-        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tighter leading-tight">
-            The AI Prompt <span class="text-gradient">Advantage</span>
-        </h1>
-        <p class="text-slate-400 mb-10 max-w-xl mx-auto text-sm leading-relaxed">
-            Professional software development and AI-driven content strategies for the modern digital ecosystem.
+    <p>
+      Explore premium portfolio interfaces, modern content platforms,
+      AI-powered showcase pages, and entertainment experiences in one elegant FAQ-style UI.
+      Open every project directly inside this page or launch externally in a new tab.
+    </p>
+
+    <div class="top-buttons">
+      <a href="https://debeatzgh1.github.io/me-/" target="_blank" class="btn-primary">
+        Open Main Portfolio
+      </a>
+
+      <a href="https://wa.me/233270201181" target="_blank" class="btn-secondary">
+        Contact on WhatsApp
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- SEARCH -->
+<div class="search-box">
+  <input type="text" id="searchInput" placeholder="Search templates, interfaces, AI tools, portfolio pages..." />
+</div>
+
+<!-- PORTFOLIO -->
+<section class="section">
+
+  <h2 class="section-title">Portfolio Templates UI</h2>
+
+  <p class="section-desc">
+    Premium personal branding interfaces, portfolio showcase layouts,
+    modern homepage designs, and interactive profile experiences.
+  </p>
+
+  <div class="grid">
+
+    <!-- CARD -->
+    <div class="card searchable">
+      <div class="preview">
+        <iframe src="https://debeatzgh1.github.io/Personal-Portfolio-site-/"></iframe>
+      </div>
+
+      <div class="card-content">
+        <span class="category-tag">Portfolio UI</span>
+
+        <h3>Personal Portfolio Site</h3>
+
+        <p>
+          Elegant responsive portfolio website with modern sections,
+          profile showcase, branding blocks, and interactive presentation layout.
         </p>
-        <div class="flex flex-wrap justify-center gap-4">
-            <button onclick="openGlobalOverlay('https://debeatzgh1.github.io/Side-hustle-starter-kit-/')" class="bg-cyan-500 text-slate-950 px-8 py-4 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:scale-105 transition">Start Hustle Kit</button>
-            <button onclick="openGlobalOverlay('https://appdistribution.firebase.dev/i/dc2da2d4d3766b8a')" class="glass px-8 py-4 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-white/5 transition">Get App Build</button>
-        </div>
-    </header>
 
-    <section id="services" class="max-w-6xl mx-auto px-6 pb-40 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="md:col-span-2 glass p-10 rounded-[2.5rem] flex flex-col justify-end min-h-[300px]">
-            <h3 class="text-2xl font-bold mb-2">Custom Software Dev</h3>
-            <p class="text-slate-500 text-xs">Responsive UI components, Tailwind CSS integration, and cross-platform mobile app development.</p>
-        </div>
-        <div class="glass p-10 rounded-[2.5rem] border-cyan-500/20">
-            <i class="fas fa-robot text-cyan-400 text-2xl mb-6"></i>
-            <h3 class="text-lg font-bold mb-2 uppercase italic">AI Automation</h3>
-            <p class="text-slate-500 text-[11px]">Streamlining content workflows with high-level prompt engineering.</p>
-        </div>
-    </section>
+        <div class="card-buttons">
+          <a href="#" class="open-inside"
+             onclick="openViewer('Personal Portfolio Site','https://debeatzgh1.github.io/Personal-Portfolio-site-/')">
+             Open Here
+          </a>
 
-    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-md glass p-3 rounded-2xl flex items-center justify-between z-40">
-        <div class="flex items-center gap-3">
-            <div class="w-2 h-2 bg-green-500 rounded-full animate-ping"></div>
-            <span class="text-[10px] font-bold uppercase tracking-tighter text-slate-400">Network Active</span>
+          <a href="https://debeatzgh1.github.io/Personal-Portfolio-site-/"
+             target="_blank"
+             class="open-outside">
+             External
+          </a>
         </div>
-        <button onclick="openGlobalOverlay('https://debeatzgh1.github.io/me-/')" class="bg-white text-black px-4 py-2 rounded-xl text-[9px] font-black uppercase">Open Hub</button>
+      </div>
     </div>
 
-    <div id="master-overlay">
-        <div class="loader-bar" id="load-bar"></div>
-        <div class="p-4 border-b border-white/5 flex justify-between items-center">
-            <span class="text-[9px] font-mono text-cyan-500 uppercase">Secure_Portal // DeBeatzGH_Link</span>
-            <button id="close-btn" class="bg-red-500/10 text-red-500 px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase disabled:opacity-50">Wait (3s)</button>
+    <!-- CARD -->
+    <div class="card searchable">
+      <div class="preview">
+        <iframe src="https://debeatzgh1.github.io/me-/"></iframe>
+      </div>
+
+      <div class="card-content">
+        <span class="category-tag">Profile Interface</span>
+
+        <h3>Modern Profile Hub</h3>
+
+        <p>
+          Stylish personal identity page with premium cards,
+          responsive sections, showcase blocks, and digital branding aesthetics.
+        </p>
+
+        <div class="card-buttons">
+          <a href="#" class="open-inside"
+             onclick="openViewer('Modern Profile Hub','https://debeatzgh1.github.io/me-/')">
+             Open Here
+          </a>
+
+          <a href="https://debeatzgh1.github.io/me-/"
+             target="_blank"
+             class="open-outside">
+             External
+          </a>
         </div>
-        <iframe id="master-frame" class="w-full flex-grow" src=""></iframe>
+      </div>
     </div>
 
-    <script>
-        const overlay = document.getElementById('master-overlay');
-        const frame = document.getElementById('master-frame');
-        const closeBtn = document.getElementById('close-btn');
-        const loadBar = document.getElementById('load-bar');
+    <!-- CARD -->
+    <div class="card searchable">
+      <div class="preview">
+        <iframe src="https://debeatzgh1.github.io/Modern-homepage-styling-with-TailwindCSS-/"></iframe>
+      </div>
 
-        function openGlobalOverlay(url) {
-            frame.src = url;
-            overlay.style.display = 'flex';
-            loadBar.style.width = '100%';
-            
-            let sec = 3;
-            closeBtn.disabled = true;
-            closeBtn.innerText = `Wait (${sec}s)`;
-            
-            const timer = setInterval(() => {
-                sec--;
-                if(sec > 0) { closeBtn.innerText = `Wait (${sec}s)`; }
-                else {
-                    clearInterval(timer);
-                    closeBtn.disabled = false;
-                    closeBtn.innerText = "Close [X]";
-                    closeBtn.onclick = () => { overlay.style.display = 'none'; frame.src = ''; loadBar.style.width = '0%'; };
-                }
-            }, 1000);
-        }
+      <div class="card-content">
+        <span class="category-tag">Homepage UI</span>
 
-        // Auto-popup logic for new visitors
-        window.addEventListener('load', () => {
-            if(!localStorage.getItem('popup_seen')) {
-                setTimeout(() => {
-                    openGlobalOverlay('https://debeatzgh1.github.io/Blogger-sign-up-button-/');
-                    localStorage.setItem('popup_seen', 'true');
-                }, 5000);
-            }
-        });
-    </script>
+        <h3>Tailwind Homepage Styling</h3>
+
+        <p>
+          Modern homepage concept using premium TailwindCSS inspired layouts,
+          animations, responsive sections, and elegant visual hierarchy.
+        </p>
+
+        <div class="card-buttons">
+          <a href="#" class="open-inside"
+             onclick="openViewer('Tailwind Homepage Styling','https://debeatzgh1.github.io/Modern-homepage-styling-with-TailwindCSS-/')">
+             Open Here
+          </a>
+
+          <a href="https://debeatzgh1.github.io/Modern-homepage-styling-with-TailwindCSS-/"
+             target="_blank"
+             class="open-outside">
+             External
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTENT UI -->
+<section class="section">
+
+  <h2 class="section-title">Content Interface UI</h2>
+
+  <p class="section-desc">
+    Interactive content hubs, AI starter kits, blogging interfaces,
+    productivity pages, and monetization resources.
+  </p>
+
+  <div class="grid">
+
+    <!-- Repeatable Cards -->
+
+    <div class="card searchable">
+      <div class="preview">
+        <iframe src="https://debeatzgh1.github.io/Decode-AI-starter-kit-/"></iframe>
+      </div>
+
+      <div class="card-content">
+        <span class="category-tag">AI Toolkit</span>
+
+        <h3>Decode AI Starter Kit</h3>
+
+        <p>
+          AI learning and productivity interface designed for creators,
+          startups, students, and online entrepreneurs.
+        </p>
+
+        <div class="card-buttons">
+          <a href="#" class="open-inside"
+             onclick="openViewer('Decode AI Starter Kit','https://debeatzgh1.github.io/Decode-AI-starter-kit-/')">
+             Open Here
+          </a>
+
+          <a href="https://debeatzgh1.github.io/Decode-AI-starter-kit-/"
+             target="_blank"
+             class="open-outside">
+             External
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card searchable">
+      <div class="preview">
+        <iframe src="https://debeatzgh1.github.io/The-Ultimate-Guide-to-Side-Hustle/"></iframe>
+      </div>
+
+      <div class="card-content">
+        <span class="category-tag">Side Hustle UI</span>
+
+        <h3>Ultimate Side Hustle Guide</h3>
+
+        <p>
+          Professional side hustle interface with monetization ideas,
+          online business tools, and startup-focused resources.
+        </p>
+
+        <div class="card-buttons">
+          <a href="#" class="open-inside"
+             onclick="openViewer('Ultimate Side Hustle Guide','https://debeatzgh1.github.io/The-Ultimate-Guide-to-Side-Hustle/')">
+             Open Here
+          </a>
+
+          <a href="https://debeatzgh1.github.io/The-Ultimate-Guide-to-Side-Hustle/"
+             target="_blank"
+             class="open-outside">
+             External
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card searchable">
+      <div class="preview">
+        <iframe src="https://debeatzgh1.github.io/posts/"></iframe>
+      </div>
+
+      <div class="card-content">
+        <span class="category-tag">Content Hub</span>
+
+        <h3>Posts Interface</h3>
+
+        <p>
+          Responsive blog and content experience featuring modern layouts,
+          visual presentation blocks, and mobile optimized UI sections.
+        </p>
+
+        <div class="card-buttons">
+          <a href="#" class="open-inside"
+             onclick="openViewer('Posts Interface','https://debeatzgh1.github.io/posts/')">
+             Open Here
+          </a>
+
+          <a href="https://debeatzgh1.github.io/posts/"
+             target="_blank"
+             class="open-outside">
+             External
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ENTERTAINMENT -->
+<section class="section">
+
+  <h2 class="section-title">Entertainment Interface UI</h2>
+
+  <p class="section-desc">
+    Creative widgets, smart iframe layouts, AI chat interfaces,
+    popup experiences, and interactive entertainment components.
+  </p>
+
+  <div class="grid">
+
+    <div class="card searchable">
+      <div class="preview">
+        <iframe src="https://debeatzgh1.github.io/ai-chat/"></iframe>
+      </div>
+
+      <div class="card-content">
+        <span class="category-tag">AI Chat UI</span>
+
+        <h3>AI Chat Interface</h3>
+
+        <p>
+          Modern AI assistant interface featuring sleek interaction blocks,
+          responsive layouts, and immersive user experience.
+        </p>
+
+        <div class="card-buttons">
+          <a href="#" class="open-inside"
+             onclick="openViewer('AI Chat Interface','https://debeatzgh1.github.io/ai-chat/')">
+             Open Here
+          </a>
+
+          <a href="https://debeatzgh1.github.io/ai-chat/"
+             target="_blank"
+             class="open-outside">
+             External
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card searchable">
+      <div class="preview">
+        <iframe src="https://debeatzgh1.github.io/popup-html-page-generator-blogger/"></iframe>
+      </div>
+
+      <div class="card-content">
+        <span class="category-tag">Popup Generator</span>
+
+        <h3>Popup HTML Generator</h3>
+
+        <p>
+          Interactive popup creation interface with smart modal systems,
+          blogging tools, and premium visual interactions.
+        </p>
+
+        <div class="card-buttons">
+          <a href="#" class="open-inside"
+             onclick="openViewer('Popup HTML Generator','https://debeatzgh1.github.io/popup-html-page-generator-blogger/')">
+             Open Here
+          </a>
+
+          <a href="https://debeatzgh1.github.io/popup-html-page-generator-blogger/"
+             target="_blank"
+             class="open-outside">
+             External
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card searchable">
+      <div class="preview">
+        <iframe src="https://debeatzgh1.github.io/-Floating-Dock-Smart-Iframe-Modal/#"></iframe>
+      </div>
+
+      <div class="card-content">
+        <span class="category-tag">Smart Dock UI</span>
+
+        <h3>Floating Dock Smart Modal</h3>
+
+        <p>
+          Advanced floating dock experience with iframe overlays,
+          premium modal interactions, and responsive navigation tools.
+        </p>
+
+        <div class="card-buttons">
+          <a href="#" class="open-inside"
+             onclick="openViewer('Floating Dock Smart Modal','https://debeatzgh1.github.io/-Floating-Dock-Smart-Iframe-Modal/#')">
+             Open Here
+          </a>
+
+          <a href="https://debeatzgh1.github.io/-Floating-Dock-Smart-Iframe-Modal/#"
+             target="_blank"
+             class="open-outside">
+             External
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- IFRAME VIEWER -->
+<div class="viewer" id="viewer">
+
+  <div class="viewer-top">
+    <h2 id="viewerTitle">Preview</h2>
+
+    <div class="viewer-actions">
+
+      <a href="#" id="externalBtn" target="_blank">
+        Open External
+      </a>
+
+      <button onclick="closeViewer()">
+        Close
+      </button>
+
+    </div>
+  </div>
+
+  <iframe id="viewerFrame"></iframe>
+
+</div>
+
+<!-- WHATSAPP -->
+<a class="whatsapp"
+   href="https://wa.me/233270201181"
+   target="_blank">
+   💬
+</a>
+
+<!-- FOOTER -->
+<footer class="footer">
+  Designed for <strong>Kumah David</strong> • Premium FAQ Showcase UI
+</footer>
+
+<script>
+
+/* IFRAME VIEWER */
+function openViewer(title,url){
+
+  document.getElementById("viewer").classList.add("active");
+
+  document.getElementById("viewerTitle").innerText = title;
+
+  document.getElementById("viewerFrame").src = url;
+
+  document.getElementById("externalBtn").href = url;
+
+}
+
+function closeViewer(){
+
+  document.getElementById("viewer").classList.remove("active");
+
+  document.getElementById("viewerFrame").src = "";
+
+}
+
+/* SEARCH */
+const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("keyup", function(){
+
+  let filter = this.value.toLowerCase();
+
+  let cards = document.querySelectorAll(".searchable");
+
+  cards.forEach(card => {
+
+    let text = card.innerText.toLowerCase();
+
+    if(text.includes(filter)){
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+
+  });
+
+});
+
+</script>
+
 </body>
 </html>
-
-
-
-<iframe src="https://beatzde4.blogspot.com/p/home.html" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
-
-
-
-<script src="https://gist.github.com/debeatzgh1/98cf571e21881f4a39560503988861d3.js"></script>
