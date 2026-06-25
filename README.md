@@ -375,7 +375,7 @@ body::after{
       ✨ Premium Personal Showcase Hub
     </div>
 
-    <h1>Kumah David</h1>
+    <h1>UX & INTERFACES</h1>
 
     <p>
       Explore premium portfolio interfaces, modern content platforms,
