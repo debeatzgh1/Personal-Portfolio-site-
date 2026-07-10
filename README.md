@@ -380,7 +380,7 @@
         </a>
 
         <a class="dbz-link"
-           href="https://beatzde4.blogspot.com/"
+           href="https://debeatzgh1.github.io/blogs/"
            target="_blank">
            ✍️ Blog
         </a>
